@@ -1,6 +1,0 @@
-#FileLock
-#Sun Mar 08 21:35:57 BRT 2026
-hostName=192.168.1.4
-id=19cd005a7efc316d211c1cb1cc28df3f8f88f04ce7b
-method=file
-server=192.168.1.4\:54339

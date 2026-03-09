@@ -1,0 +1,26 @@
+import SearchInput from "../ui/searchInput";
+
+export default function SearchComponent({ setFilter }: { setFilter: React.Dispatch<React.SetStateAction<string[]>> }) {
+    const fields = ["name", "brand", "model", "price", "manufactureYear"];
+
+    const setFilterAtIndex = (index: number, filter: string) => {
+        setFilter((prev) => {
+            const next = [...prev];
+            next[index] = filter;
+            return next;
+        });
+    };
+
+    return (
+        <div className="flex flex-col gap-2">
+            {fields.map((field, index) => (
+                <SearchInput
+                    key={index}
+                    index={index}
+                    name={field}
+                    setFilter={setFilterAtIndex}
+                />
+            ))}
+        </div>
+    );
+}
