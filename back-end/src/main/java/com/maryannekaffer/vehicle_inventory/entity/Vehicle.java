@@ -31,5 +31,6 @@ public class Vehicle {
     private BigDecimal price;
     @Column(nullable = false)
     private int manufactureYear;
-
+    @Column
+    private String image;
 }

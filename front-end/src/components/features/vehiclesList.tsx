@@ -1,15 +1,7 @@
 import { Button } from "@heroui/button";
 import { useEffect, useState } from "react";
 import PageNavigation from "../ui/pagination";
-
-interface Vehicle {
-    id: number;
-    brand: string;
-    model: string;
-    name: string;
-    description: string;
-    manufactureYear: number;
-}
+import { GetVehicles, Vehicle } from "@/api/vehicles";
 
 export default function VehiclesList({ filter, setApiLength }: { filter: string, setApiLength: (length: number) => void }) {
     const [vehicles, setVehicles] = useState<Vehicle[]>([]);
@@ -19,28 +11,7 @@ export default function VehiclesList({ filter, setApiLength }: { filter: string,
     const [message, setMessage] = useState("");
 
     useEffect(() => {
-        setMessage("")
-        setLoading(true);
-        const fetchVehicles = async () => {
-            try {
-                const response = await fetch(`http://localhost:8080/vehicles/get?${filter}&page=${page - 1}&size=16`);
-                const data = await response.json();
-                setVehicles(data.content);
-                setPage(1);
-                setApiLength(data.totalElements);
-                setApiPages(data.totalPages);
-
-                if (data.content.length === 0) {
-                    setMessage("No vehicles found.");
-                }
-                setLoading(false);
-            } catch (error) {
-                console.error("Error fetching vehicles:", error);
-                setLoading(false);
-                setMessage("Error fetching vehicles. Please try again.");
-            }
-        };
-        fetchVehicles();
+        GetVehicles({ filter, page, setMessage, setLoading, setVehicles, setApiLength, setApiPages, setPage });
     }, [page, filter]);
 
     return (
@@ -56,6 +27,7 @@ export default function VehiclesList({ filter, setApiLength }: { filter: string,
                     <div className={`grid grid-cols-4 gap-4 justify-between ${apiPages < 2 ? "h-full" : "min-h-[1100px]"}`}>
                         {vehicles.map(vehicle => (
                             <div key={vehicle.id} className="dark:bg-default/70 bg-default rounded-sm p-3 h-[300px] w-[305px]">
+                                <img src={`http://localhost:8080/uploads/${vehicle.image}`} alt={`${vehicle.brand} ${vehicle.model}`} className="h-40 w-full object-cover rounded-sm mb-2" />
                                 <h3>{vehicle.brand} {vehicle.model} {vehicle.name} {vehicle.description} {vehicle.manufactureYear}</h3>
                             </div>
                         ))}

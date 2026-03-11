@@ -1,5 +1,11 @@
 package com.maryannekaffer.vehicle_inventory.controller;
 
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -8,10 +14,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.maryannekaffer.vehicle_inventory.entity.Vehicle;
 import com.maryannekaffer.vehicle_inventory.repository.VehicleRepository;
@@ -31,13 +37,48 @@ public class VehicleController {
             @RequestParam(required = false) String brand,
             @RequestParam(required = false) String model,
             @RequestParam(required = false) Integer manufactureYear,
+            @RequestParam(required = false) BigDecimal price,
+            @RequestParam(required = false) String image,
             Pageable pageable) {
+
         return repository.findByFilters(name, brand, model, manufactureYear, pageable);
     }
 
     @PostMapping("/create")
     @CacheEvict(value = "vehicles", allEntries = true)
-    public Vehicle create(@RequestBody Vehicle vehicle) {
+    public Vehicle create(
+            @RequestParam String name,
+            @RequestParam String description,
+            @RequestParam String brand,
+            @RequestParam String model,
+            @RequestParam BigDecimal price,
+            @RequestParam int manufactureYear,
+            @RequestParam(required = false) MultipartFile image) throws IOException {
+
+        Vehicle vehicle = new Vehicle();
+
+        vehicle.setName(name);
+        vehicle.setDescription(description);
+        vehicle.setBrand(brand);
+        vehicle.setModel(model);
+        vehicle.setPrice(price);
+        vehicle.setManufactureYear(manufactureYear);
+
+        if (image != null && !image.isEmpty()) {
+
+            String fileName = image.getOriginalFilename();
+
+            Path uploadPath = Paths.get("uploads");
+
+            if (!Files.exists(uploadPath)) {
+                Files.createDirectories(uploadPath);
+            }
+
+            Files.write(uploadPath.resolve(fileName), image.getBytes());
+
+            vehicle.setImage(fileName); 
+        }
+
         return repository.save(vehicle);
     }
 }
