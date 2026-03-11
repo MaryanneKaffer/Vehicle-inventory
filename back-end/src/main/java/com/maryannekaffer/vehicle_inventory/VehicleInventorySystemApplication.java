@@ -7,7 +7,7 @@ import org.springframework.cache.annotation.EnableCaching;
 @SpringBootApplication
 @EnableCaching
 public class VehicleInventorySystemApplication {
-
+	
 	public static void main(String[] args) {
 		SpringApplication.run(VehicleInventorySystemApplication.class, args);
 	}

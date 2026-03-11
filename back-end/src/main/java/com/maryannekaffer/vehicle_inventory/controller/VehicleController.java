@@ -12,7 +12,9 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -76,9 +78,24 @@ public class VehicleController {
 
             Files.write(uploadPath.resolve(fileName), image.getBytes());
 
-            vehicle.setImage(fileName); 
+            vehicle.setImage(fileName);
         }
 
         return repository.save(vehicle);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public Vehicle delete(@PathVariable Long id) throws IOException {
+
+        Vehicle vehicle = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Vehicle not found"));
+
+        if (vehicle.getImage() != null) {
+            Path imagePath = Paths.get("uploads").resolve(vehicle.getImage());
+            Files.deleteIfExists(imagePath);
+        }
+
+        repository.delete(vehicle);
+        return vehicle;
     }
 }

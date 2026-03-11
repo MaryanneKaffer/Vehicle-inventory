@@ -16,7 +16,7 @@ export const GetVehicles = async ({ filter, page, setMessage, setLoading, setVeh
     setMessage("")
     setLoading(true);
     try {
-        const response = await fetch(`http://localhost:8080/vehicles/get?${filter}&page=${page - 1}&size=16`);
+        const response = await fetch(`http://localhost:8080/vehicles/get?${filter}&page=${page - 1}&size=20`);
         const data = await response.json();
         setVehicles(data.content);
         setPage(1);
@@ -44,5 +44,17 @@ export const PostVehicle = async (data: FormData) => {
         return response.json();
     } catch (error) {
         console.error("Error posting vehicle:", error);
+    }
+};
+
+export const DeleteVehicle = async (id: number) => {
+    try {
+        const response = await fetch(`http://localhost:8080/vehicles/delete/${id}`,
+            {
+                method: "DELETE"
+            });
+        return response.json();
+    } catch (error) {
+        console.error("Error deleting vehicle:", error);
     }
 };

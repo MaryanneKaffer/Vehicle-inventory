@@ -3,10 +3,15 @@ import { Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@her
 import ControllerInput from "../ui/controllerInput";
 import { useForm } from "react-hook-form";
 import { PostVehicle } from "@/api/vehicles";
+import { Input } from "@heroui/input";
+import { useRef, useState } from "react";
 
-export default function PostComponent() {
+export default function PostComponent({ setPage }: { setPage: (pages: number) => void }) {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const { control, handleSubmit, reset, register } = useForm();
+    const fileRef = useRef<HTMLInputElement | null>(null);
+    const [preview, setPreview] = useState<string | null>(null);
+    const { ref, onChange, ...rest } = register("image");
     const fields = [{ name: "name", type: "text" }, { name: "brand", type: "text" }, { name: "model", type: "text" }, { name: "price", type: "number" },
     { name: "manufactureYear", type: "number" }, { name: "description", type: "textarea" }, { name: "image", type: "file" }];
 
@@ -25,24 +30,43 @@ export default function PostComponent() {
         }
 
         PostVehicle(formData);
-
-        reset();
+        reset(); formData.delete("image"); setPreview(null);
+        setPage(1);
         onOpenChange();
     }
     return (
-        <div className="==">
+        <div >
             <Button variant="ghost" color="warning" className="w-full rounded-sm" radius="none" onPress={onOpen} > Register a Vehicle </Button>
 
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange} radius="none" className="rounded-sm" backdrop="blur" >
-                <ModalContent className="items-center">
-                    <ModalHeader className="flex flex-col gap-1 text-center">Register a Vehicle</ModalHeader>
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange} radius="none" className="rounded-sm" backdrop="blur" size="2xl">
+                <ModalContent className="items-center flex-1">
+                    <ModalHeader className="flex flex-col gap-1 text-center cursor-default text-warning">Register a Vehicle</ModalHeader>
                     <ModalBody>
                         <form onSubmit={handleSubmit(onSubmit)} className="flex gap-4">
-                            <span className="flex flex-col gap-4">
+                            <div className="flex flex-col gap-4">
+                                <ControllerInput fieldName={fields[0].name} fieldType={fields[0].type} control={control} register={register} />
+                                <Input type={fields[6].type} className="hidden absolute" {...rest} radius="none"
+                                    ref={(e: any) => { ref(e); fileRef.current = e; }}
+                                    onChange={(e) => {
+                                        onChange(e);
+                                        const file = e.target.files?.[0];
+                                        if (file) {
+                                            setPreview(URL.createObjectURL(file));
+                                        }
+                                    }} />
+                                <div className="h-[192px] mb-2 w-[250px] group border-2 border-warning flex items-center justify-center cursor-pointer overflow-hidden rounded-sm" onClick={() => fileRef.current?.click()} >
+                                    {preview ? (<>
+                                        <img src={preview} className="transition-all object-cover w-full max-h-[100%]  group-hover:opacity-0" />
+                                        <span className="text-warning absolute opacity-0 group-hover:opacity-100 transition-all">Change Image</span>
+                                    </>) : (
+                                        <span className="flex text-warning transition-all group-hover:text-black group-hover:bg-warning h-full w-full justify-center items-center">
+                                            Upload Image
+                                        </span>
+                                    )}
+                                </div>
+                            </div >
 
-                            </span>
-
-                            <span className="flex flex-col gap-4">
+                            <div className="flex flex-col gap-4">
                                 <div className="grid grid-cols-2 gap-4">
                                     {fields.slice(1, 5).map((field) => (
                                         <ControllerInput key={field.name} fieldName={field.name} fieldType={field.type} control={control} register={register} />
@@ -52,7 +76,7 @@ export default function PostComponent() {
                                 <Button color="warning" radius="none" variant="ghost" type="submit" className="mb-2 rounded-sm">
                                     Register
                                 </Button>
-                            </span>
+                            </div >
                         </form>
                     </ModalBody>
                 </ModalContent>
