@@ -9,9 +9,9 @@ export interface Vehicle {
     image: string;
 }
 
-export const GetVehicles = async ({ filter, page, setMessage, setLoading, setVehicles, setApiLength, setApiPages, setPage }: {
+export const GetVehicles = async ({ filter, page, setMessage, setLoading, setVehicles, setApiLength, setApiPages }: {
     filter: string, page: number, setMessage: (message: string) => void, setLoading: (loading: boolean) => void, setVehicles: (vehicles: Vehicle[]) => void,
-    setApiLength: (length: number) => void, setApiPages: (pages: number) => void, setPage: (page: number) => void
+    setApiLength: (length: number) => void, setApiPages: (pages: number) => void
 }) => {
     setMessage("")
     setLoading(true);
@@ -19,7 +19,6 @@ export const GetVehicles = async ({ filter, page, setMessage, setLoading, setVeh
         const response = await fetch(`http://localhost:8080/vehicles/get?${filter}&page=${page - 1}&size=20`);
         const data = await response.json();
         setVehicles(data.content);
-        setPage(1);
         setApiLength(data.totalElements);
         setApiPages(data.totalPages);
 

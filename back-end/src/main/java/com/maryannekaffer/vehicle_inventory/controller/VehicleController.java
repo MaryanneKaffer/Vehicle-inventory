@@ -43,14 +43,14 @@ public class VehicleController {
             @RequestParam(required = false) String image,
             Pageable pageable) {
 
-        return repository.findByFilters(name, brand, model, manufactureYear, pageable);
+        return repository.findByFilters(name, brand, model, manufactureYear, price, pageable);
     }
 
     @PostMapping("/create")
     @CacheEvict(value = "vehicles", allEntries = true)
     public Vehicle create(
             @RequestParam String name,
-            @RequestParam String description,
+            @RequestParam(required = false) String description,
             @RequestParam String brand,
             @RequestParam String model,
             @RequestParam BigDecimal price,

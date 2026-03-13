@@ -3,7 +3,7 @@ import { Button } from "@heroui/button";
 import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from "@heroui/react";
 import { MdDelete } from "react-icons/md";
 
-export default function DeleteComponent({ name, id, setPage }: { name: string, id: number, setPage: (page: number) => void }) {
+export default function DeleteComponent({ name, id, setPage, mbDelete }: { name: string, id: number, setPage: (page: number) => void, mbDelete: boolean }) {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
     function onDelete() {
@@ -14,8 +14,8 @@ export default function DeleteComponent({ name, id, setPage }: { name: string, i
 
     return (
         <>
-            <Button variant="shadow" size="sm" color="danger" radius="none" onPress={onOpen}
-                className="mt-auto ml-auto w-[40px] min-w-0 p-0 rounded-sm group-hover:opacity-100 opacity-0 transition-opacity">
+            <Button variant="ghost" size="sm" color="danger" radius="none" onPress={onOpen}
+                className={`mt-auto ml-auto w-[40px] min-w-0 p-0 rounded-sm group-hover:opacity-100 ${!mbDelete && "opacity-0"} transition-opacity absolute bottom-3 right-3`}>
                 <MdDelete size={20} />
             </Button>
 

@@ -28,7 +28,8 @@ export default function SearchInput({ setFilter, index, name }: { setFilter: (in
     return (
         <div className="h-fit w-full">
             <p className="capitalize text-sm text-gray-400">{name}</p>
-            <Input classNames={{ inputWrapper: "bg-black/90 rounded-sm" }}
+            <Input classNames={{ inputWrapper: "dark:bg-black/90 bg-white rounded-sm" }}
+                type={name === "price" || name === "manufactureYear" ? "number" : "text"}
                 isClearable
                 onClear={() => setValue("")}
                 placeholder="..."

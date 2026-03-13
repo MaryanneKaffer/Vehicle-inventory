@@ -54,10 +54,12 @@ export default function PostComponent({ setPage }: { setPage: (pages: number) =>
                                             setPreview(URL.createObjectURL(file));
                                         }
                                     }} />
-                                <div className="h-[192px] mb-2 w-[250px] group border-2 border-warning flex items-center justify-center cursor-pointer overflow-hidden rounded-sm" onClick={() => fileRef.current?.click()} >
+                                <div className="h-[192px] relative mb-2 w-[250px] group border-2 border-warning flex items-center justify-center cursor-pointer overflow-hidden rounded-sm" onClick={() => fileRef.current?.click()} >
                                     {preview ? (<>
-                                        <img src={preview} className="transition-all object-cover w-full max-h-[100%]  group-hover:opacity-0" />
-                                        <span className="text-warning absolute opacity-0 group-hover:opacity-100 transition-all">Change Image</span>
+                                        <img src={preview} className="transition-all object-cover w-full max-h-[100%]" />
+                                        <span className="text-warning absolute opacity-0 group-hover:opacity-100 transition-all h-full w-full bg-black/70 backdrop-blur-sm">
+                                            <p className="flex justify-center h-full items-center"> Change Image</p>
+                                        </span>
                                     </>) : (
                                         <span className="flex text-warning transition-all group-hover:text-black group-hover:bg-warning h-full w-full justify-center items-center">
                                             Upload Image

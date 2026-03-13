@@ -1,7 +1,9 @@
 import { Pagination } from "@heroui/react";
 
-export default function PageNavigation({ apiPages, setPage }: { apiPages: number, setPage: (page: number) => void }) {
+export default function PageNavigation({ apiPages, setPage, page }: { apiPages: number, setPage: (page: number) => void, page: number }) {
     return (
-        <Pagination isCompact color="warning" radius="sm" variant="flat" showControls className="mx-auto rounded-sm" initialPage={1} total={apiPages} onChange={(page: number) => setPage(page)} />
+        <Pagination isCompact color="warning" radius="sm" variant="flat" showControls page={page}
+            classNames={{ cursor: "!rounded-[3px]", next: "!rounded-[3px]", prev: "!rounded-[3px]" }}
+            initialPage={1} total={apiPages} onChange={(page: number) => setPage(page)} />
     );
 }

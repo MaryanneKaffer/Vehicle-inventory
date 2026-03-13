@@ -8,9 +8,11 @@ export default function ControllerInput({ fieldName, fieldType, control, registe
             :
             <Controller name={fieldName} control={control} render={({ field }) => (
                 fieldType === "textarea" ? (
-                    <Textarea placeholder={fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} {...field} radius="none" className="rounded-sm w-full h-[80px]" />
+                    <Textarea placeholder={fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} {...field} radius="none" className="rounded-sm w-full h-[80px]"
+                        classNames={{ inputWrapper: "bg-default" }} />
                 ) : (
-                    <Input type={fieldType} placeholder={fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} {...field} radius="none" className="rounded-sm w-full" />
+                    <Input type={fieldType} placeholder={fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} {...field} radius="none" className="rounded-sm w-full"
+                        classNames={{ inputWrapper: "bg-default" }} />
                 )
             )} />
     );
