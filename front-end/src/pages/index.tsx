@@ -20,6 +20,7 @@ export default function IndexPage() {
   const [apiPages, setApiPages] = useState(0);
   const [mbDelete, setMbDelete] = useState(false);
   const [screen, setScreen] = useState("");
+  const [isOpenFiltering, setFiltering] = useState(false)
 
   useEffect(() => {
     GetVehicles({ filter: filter.filter(Boolean).join("&"), page, setMessage, setLoading, setVehicles, setApiLength, setApiPages });
@@ -33,16 +34,19 @@ export default function IndexPage() {
           <ThemeSwitch />
           <p className="text-warning">{apiLength} vehicles registered</p>
         </div>
-        <div className="h-full w-full flex sm:flex-row flex-col gap-2 sm:gap-4">
-          {screen === "xsmall" && < div className="flex gap-1 items-center">
-            <Button color="warning" radius="none" className="rounded-sm w-full">Set filters</Button>
-            <Button variant={mbDelete ? "shadow" : "ghost"} color="danger" radius="none" onPress={() => setMbDelete(!mbDelete)} className="w-[50px] min-w-0 p-0 rounded-sm">
-              <MdDelete size={20} />
-            </Button>
-          </div>}
-          <div className="xl:w-[300px] flex flex-col gap-4 bg-default/70 rounded-sm p-3 sticky top-12 h-fit sm:block hidden">
-            <SearchComponent setFilter={setFilter} />
-            <PostComponent setPage={setPage} />
+        <div className="h-full w-full flex lg:flex-row flex-col gap-2 sm:gap-4">
+          <div className="relative sticky top-2 -mx-4 md:m-0 px-4 z-100 bg-black/60 md:p-0 py-2 backdrop-blur-md xl:w-fit w-[100dvw] items-center h-fit">
+            {screen.includes("small") && < div className="flex gap-1 items-center">
+              <Button color="warning" radius="none" className="rounded-sm flex-1" onPress={() => setFiltering(!isOpenFiltering)} >Set filters</Button>
+              <PostComponent setPage={setPage} />
+              <Button variant={mbDelete ? "shadow" : "ghost"} color="danger" radius="none" onPress={() => setMbDelete(!mbDelete)} className="w-[50px] min-w-0 p-0 rounded-sm">
+                <MdDelete size={20} />
+              </Button>
+            </div>}
+            <div className={`xl:w-[300px] w-[92vw] md:flex absolute flex-col gap-4 md:bg-default/70 bg-default rounded-sm p-3 lg:sticky h-fit z-100 top-14 backdrop-blur-lg ${isOpenFiltering ? "block" : "md:block hidden"}`}>
+              <SearchComponent setFilter={setFilter} />
+              {!screen.includes("small") && <PostComponent setPage={setPage} />}
+            </div>
           </div>
           <div className="flex-1 justify-items-center">
             <VehiclesList setApiLength={setApiLength} setPage={setPage} vehicles={vehicles} loading={loading} message={message} apiPages={apiPages} mbDelete={mbDelete} screen={screen} />
