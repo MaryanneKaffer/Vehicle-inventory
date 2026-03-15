@@ -35,7 +35,7 @@ export default function IndexPage() {
           <p className="text-warning">{apiLength} vehicles registered</p>
         </div>
         <div className="h-full w-full flex lg:flex-row flex-col gap-2 sm:gap-4">
-          <div className="relative sticky top-2 -mx-4 md:m-0 px-4 z-100 bg-black/60 md:p-0 py-2 backdrop-blur-md xl:w-fit w-[100dvw] items-center h-fit">
+          <div className="relative sticky top-2 -mx-4 lg:m-0 px-4 z-100 dark:bg-black/60 bg-gray-100/80 lg:p-0 py-2 backdrop-blur-md lg:w-fit w-[100dvw] items-center h-fit ">
             {screen.includes("small") && < div className="flex gap-1 items-center">
               <Button color="warning" radius="none" className="rounded-sm flex-1" onPress={() => setFiltering(!isOpenFiltering)} >Set filters</Button>
               <PostComponent setPage={setPage} />
@@ -43,7 +43,8 @@ export default function IndexPage() {
                 <MdDelete size={20} />
               </Button>
             </div>}
-            <div className={`xl:w-[300px] w-[92vw] md:flex absolute flex-col gap-4 md:bg-default/70 bg-default rounded-sm p-3 lg:sticky h-fit z-100 top-14 backdrop-blur-lg ${isOpenFiltering ? "block" : "md:block hidden"}`}>
+            <div className={`xl:w-[300px] lg:w-[200px w-[100%] lg:flex absolute flex-col gap-4 lg:bg-default/70 bg-transparent rounded-sm lg:p-3 lg:sticky h-fit z-100 top-10 
+              ${isOpenFiltering ? "block" : "lg:block hidden"} -mx-4 lg:m-0 px-4 py-3 `}>
               <SearchComponent setFilter={setFilter} />
               {!screen.includes("small") && <PostComponent setPage={setPage} />}
             </div>

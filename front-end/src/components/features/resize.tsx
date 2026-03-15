@@ -6,7 +6,7 @@ export default function Resize({ setScreen }: { setScreen: (screen: string) => v
         function handleResize() {
             const width = window.innerWidth;
 
-            const screen = width > 1500 ? "large" : width > 1200
+            const screen = width > 1500 ? "large" : width > 900
                 ? "medium" : width > 700 ? "small" : "xsmall";
 
             setScreen(screen);

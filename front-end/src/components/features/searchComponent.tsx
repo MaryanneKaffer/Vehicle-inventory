@@ -12,7 +12,7 @@ export default function SearchComponent({ setFilter }: { setFilter: React.Dispat
     };
 
     return (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 lg:bg-transparent bg-default lg:p-0 px-2 py-3 rounded-sm">
             {fields.map((field, index) => (
                 <SearchInput
                     key={index}
