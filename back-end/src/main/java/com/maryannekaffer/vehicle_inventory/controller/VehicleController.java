@@ -46,6 +46,12 @@ public class VehicleController {
         return repository.findByFilters(name, brand, model, manufactureYear, price, pageable);
     }
 
+    @GetMapping("/{id}")
+    public Vehicle getById(@PathVariable Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Vehicle not found"));
+    }
+
     @PostMapping("/create")
     @CacheEvict(value = "vehicles", allEntries = true)
     public Vehicle create(

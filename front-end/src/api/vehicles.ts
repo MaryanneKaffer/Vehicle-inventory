@@ -33,6 +33,16 @@ export const GetVehicles = async ({ filter, page, setMessage, setLoading, setVeh
     setLoading(false);
 };
 
+export async function GetVehicleById(id: number, setVehicle: (vehicle: Vehicle) => void) {
+    try {
+        const response = await fetch(`http://localhost:8080/vehicles/${id}`);
+        const data = await response.json();
+        setVehicle(data)
+    } catch (error) {
+        console.error("Error fetching vehicles:", error);
+    }
+}
+
 export const PostVehicle = async (data: FormData) => {
     try {
         const response = await fetch(`http://localhost:8080/vehicles/create`,

@@ -9,6 +9,7 @@ import PageNavigation from "@/components/ui/pagination";
 import { Button } from "@heroui/button";
 import { MdDelete } from "react-icons/md";
 import Resize from "@/components/features/resize";
+import { GrView } from "react-icons/gr";
 
 export default function IndexPage() {
   const [filter, setFilter] = useState<string[]>([]);
@@ -19,6 +20,7 @@ export default function IndexPage() {
   const [message, setMessage] = useState("");
   const [apiPages, setApiPages] = useState(0);
   const [mbDelete, setMbDelete] = useState(false);
+  const [mbView, setMbView] = useState(false);
   const [screen, setScreen] = useState("");
   const [isOpenFiltering, setFiltering] = useState(false)
 
@@ -39,18 +41,21 @@ export default function IndexPage() {
             {screen.includes("small") && < div className="flex gap-1 items-center">
               <Button color="warning" radius="none" className="rounded-sm flex-1" onPress={() => setFiltering(!isOpenFiltering)} >Set filters</Button>
               <PostComponent setPage={setPage} />
-              <Button variant={mbDelete ? "shadow" : "ghost"} color="danger" radius="none" onPress={() => setMbDelete(!mbDelete)} className="w-[50px] min-w-0 p-0 rounded-sm">
+              <Button variant={mbView ? "shadow" : "ghost"} color="warning" radius="none" onPress={() => { setMbView(!mbView); setMbDelete(false) }} className="w-[50px] min-w-0 p-0 rounded-sm">
+                <GrView size={18} />
+              </Button>
+              <Button variant={mbDelete ? "shadow" : "ghost"} color="danger" radius="none" onPress={() => { setMbDelete(!mbDelete); setMbView(false) }} className="w-[50px] min-w-0 p-0 rounded-sm">
                 <MdDelete size={20} />
               </Button>
             </div>}
-            <div className={`xl:w-[300px] lg:w-[200px w-[100%] lg:flex absolute flex-col gap-4 lg:bg-default/70 bg-transparent rounded-sm lg:p-3 lg:sticky h-fit z-100 top-10 
+            <div className={`xl:w-[300px] lg:w-[200px w-[100%] lg:flex absolute flex-col gap-4 lg:bg-default/70 bg-transparent rounded-sm lg:p-3 lg:sticky h-fit z-50 top-10 
               ${isOpenFiltering ? "block" : "lg:block hidden"} -mx-4 lg:m-0 px-4 py-3 `}>
               <SearchComponent setFilter={setFilter} />
               {!screen.includes("small") && <PostComponent setPage={setPage} />}
             </div>
           </div>
           <div className="flex-1 justify-items-center">
-            <VehiclesList setApiLength={setApiLength} setPage={setPage} vehicles={vehicles} loading={loading} message={message} apiPages={apiPages} mbDelete={mbDelete} screen={screen} />
+            <VehiclesList setApiLength={setApiLength} setPage={setPage} vehicles={vehicles} loading={loading} message={message} apiPages={apiPages} mbDelete={mbDelete} screen={screen} mbView={mbView} />
             {!message && <PageNavigation apiPages={apiPages} setPage={setPage} page={page} />}
           </div>
         </div>

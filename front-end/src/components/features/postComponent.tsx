@@ -42,7 +42,7 @@ export default function PostComponent({ setPage }: { setPage: (pages: number) =>
                 <ModalContent className="items-center flex-1">
                     <ModalHeader className="flex flex-col gap-1 text-center cursor-default text-warning">Register a Vehicle</ModalHeader>
                     <ModalBody>
-                        <form onSubmit={handleSubmit(onSubmit)} className="flex gap-4">
+                        <form onSubmit={handleSubmit(onSubmit)} className="flex md:flex-row flex-col gap-4">
                             <div className="flex flex-col gap-4">
                                 <ControllerInput fieldName={fields[0].name} fieldType={fields[0].type} control={control} register={register} />
                                 <Input type={fields[6].type} className="hidden absolute" {...rest} radius="none"
@@ -54,7 +54,7 @@ export default function PostComponent({ setPage }: { setPage: (pages: number) =>
                                             setPreview(URL.createObjectURL(file));
                                         }
                                     }} />
-                                <div className="h-[192px] relative mb-2 w-[250px] group border-2 border-warning flex items-center justify-center cursor-pointer overflow-hidden rounded-sm" onClick={() => fileRef.current?.click()} >
+                                <div className="h-[192px] relative md:mb-2 md:w-[250px] group border-2 border-warning flex items-center justify-center cursor-pointer overflow-hidden rounded-sm" onClick={() => fileRef.current?.click()} >
                                     {preview ? (<>
                                         <img src={preview} className="transition-all object-cover w-full max-h-[100%]" />
                                         <span className="text-warning absolute opacity-0 group-hover:opacity-100 transition-all h-full w-full bg-black/70 backdrop-blur-sm">
