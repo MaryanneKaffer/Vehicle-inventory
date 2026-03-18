@@ -3,6 +3,7 @@ import { Modal, ModalBody, ModalContent, useDisclosure } from "@heroui/modal";
 import { useEffect, useState } from "react";
 import { GrView } from "react-icons/gr";
 import { GetVehicleById, Vehicle } from "@/api/vehicles";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function ViewComponent({ id, mbView }: { id: number, mbView: boolean }) {
     const [vehicle, setVehicle] = useState<Vehicle>()
@@ -15,7 +16,7 @@ export default function ViewComponent({ id, mbView }: { id: number, mbView: bool
     return (
         <div >
             <Button variant="ghost" size="sm" color="warning" radius="none" onPress={onOpen}
-                className={`w-[40px] min-w-0 min-h-0 h-[35px] p-0 rounded-sm ${!mbView && "opacity-0 -z-100"} transition-opacity lg:flex absolute bottom-0 right-0`}>
+                className={`w-[40px] min-w-0 min-h-0 h-[35px] p-0 rounded-sm ${!mbView && "opacity-0 lg:opacity-100 lg:z-0 -z-100"} transition-opacity lg:relative absolute bottom-0 right-0`}>
                 <GrView size={18} />
             </Button>
 
@@ -25,7 +26,7 @@ export default function ViewComponent({ id, mbView }: { id: number, mbView: bool
                         <ModalBody className="flex-1 gap-4 h-full">
                             <form className="flex md:flex-row flex-col gap-4 h-full mt-4">
                                 <div className="h-[200px] relative md:w-[250px] group border-2 border-warning flex items-center justify-center cursor-pointer overflow-hidden rounded-sm" >
-                                    {vehicle.image && <img src={`http://localhost:8080/uploads/${vehicle.image}`} className="transition-all object-cover w-full h-[100%]" />}
+                                    {vehicle.image && <img src={`${API_URL}}/uploads/${vehicle.image}`} className="transition-all object-cover w-full h-[100%]" />}
                                     <span className={`text-warning absolute ${vehicle.image && "opacity-0 group-hover:opacity-100 transition-all"} h-full w-full bg-black/70 backdrop-blur-sm`}>
                                         <p className="flex justify-center h-full items-center"> {vehicle.image || "No image"} </p>
                                     </span>

@@ -15,7 +15,7 @@ export default function DeleteComponent({ name, id, setPage, mbDelete }: { name:
     return (
         <>
             <Button variant="ghost" size="sm" color="danger" radius="none" onPress={onOpen}
-                className={`w-[40px] min-w-0 p-0 h-[35px] rounded-sm group-hover:opacity-100 ${!mbDelete && "opacity-0 -z-100"} transition-opacity`}>
+                className={`w-[40px] min-w-0 p-0 h-[35px] rounded-sm group-hover:opacity-100 ${!mbDelete && "opacity-0 -z-100 lg:z-10"} transition-opacity`}>
                 <MdDelete size={20} />
             </Button>
 

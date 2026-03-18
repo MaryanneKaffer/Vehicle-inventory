@@ -1,3 +1,5 @@
+const API_URL = import.meta.env.VITE_API_URL;
+
 export interface Vehicle {
     id: number;
     brand: string;
@@ -16,7 +18,7 @@ export const GetVehicles = async ({ filter, page, setMessage, setLoading, setVeh
     setMessage("")
     setLoading(true);
     try {
-        const response = await fetch(`http://localhost:8080/vehicles/get?${filter}&page=${page - 1}&size=20`);
+        const response = await fetch(`${API_URL}/vehicles/get?${filter}&page=${page - 1}&size=20`);
         const data = await response.json();
         setVehicles(data.content);
         setApiLength(data.totalElements);
@@ -35,7 +37,7 @@ export const GetVehicles = async ({ filter, page, setMessage, setLoading, setVeh
 
 export async function GetVehicleById(id: number, setVehicle: (vehicle: Vehicle) => void) {
     try {
-        const response = await fetch(`http://localhost:8080/vehicles/${id}`);
+        const response = await fetch(`${API_URL}/vehicles/${id}`);
         const data = await response.json();
         setVehicle(data)
     } catch (error) {
@@ -45,7 +47,7 @@ export async function GetVehicleById(id: number, setVehicle: (vehicle: Vehicle) 
 
 export const PostVehicle = async (data: FormData) => {
     try {
-        const response = await fetch(`http://localhost:8080/vehicles/create`,
+        const response = await fetch(`${API_URL}/vehicles/create`,
             {
                 method: "POST",
                 body: data
@@ -58,7 +60,7 @@ export const PostVehicle = async (data: FormData) => {
 
 export const DeleteVehicle = async (id: number) => {
     try {
-        const response = await fetch(`http://localhost:8080/vehicles/delete/${id}`,
+        const response = await fetch(`${API_URL}/vehicles/delete/${id}`,
             {
                 method: "DELETE"
             });

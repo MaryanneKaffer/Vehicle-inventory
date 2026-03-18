@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Mazda Miata",
+        "description": "An iconic, lightweight, two-seat roadster that launched the first generation of the MX-5, blending classic British roadster styling with Japanese reliability",
+        "brand": "Mazda",
+        "model": "Mazda MX-5 (NA)",
+        "price": 13000,
+        "manufactureYear": 1990,
+        "image": "/Mazda Miata 1990.jpg"
+    },
+    {
+        "name": "Corolla",
+        "description": "Sedan econômico",
+        "brand": "Toyota",
+        "model": "XEi",
+        "price": 105000,
+        "manufactureYear": 2021,
+        "image": null
+    }
+]

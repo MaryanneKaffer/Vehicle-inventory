@@ -24,7 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.maryannekaffer.vehicle_inventory.entity.Vehicle;
 import com.maryannekaffer.vehicle_inventory.repository.VehicleRepository;
 
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "")
 @RestController
 @RequestMapping("/vehicles")
 public class VehicleController {
