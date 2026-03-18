@@ -24,7 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.maryannekaffer.vehicle_inventory.entity.Vehicle;
 import com.maryannekaffer.vehicle_inventory.repository.VehicleRepository;
 
-@CrossOrigin(origins = "https://vehicle-inventory.vercel.app")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/vehicles")
 public class VehicleController {
@@ -43,7 +43,7 @@ public class VehicleController {
             @RequestParam(required = false) String image,
             Pageable pageable) {
 
-        return repository.findByFilters(name, brand, model, manufactureYear, price, pageable);
+        return repository.findAll(pageable);
     }
 
     @GetMapping("/{id}")
