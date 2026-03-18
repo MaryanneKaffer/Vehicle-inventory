@@ -9,12 +9,273 @@
         "image": "/Mazda Miata 1990.jpg"
     },
     {
-        "name": "Corolla",
-        "description": "Sedan econômico",
+        "name": "Toyota Supra MK4",
+        "description": "A legendary Japanese sports car known for its 2JZ engine and immense tuning potential",
         "brand": "Toyota",
-        "model": "XEi",
-        "price": 105000,
-        "manufactureYear": 2021,
-        "image": null
+        "model": "Supra MK4",
+        "price": 45000,
+        "manufactureYear": 1994,
+        "image": "/toyota supra 1994.jpg"
+    },
+    {
+        "name": "Nissan Skyline GT-R R34",
+        "description": "An iconic performance car featuring advanced AWD and twin-turbo inline-six power",
+        "brand": "Nissan",
+        "model": "Skyline GT-R R34",
+        "price": 60000,
+        "manufactureYear": 1999,
+        "image": "/nissan skyline r34.jpg"
+    },
+    {
+        "name": "Honda Civic Type R EK9",
+        "description": "A lightweight, high-revving hot hatch with a racing pedigree",
+        "brand": "Honda",
+        "model": "Civic Type R EK9",
+        "price": 25000,
+        "manufactureYear": 1997,
+        "image": "/honda civic ek9.jpg"
+    },
+    {
+        "name": "Ford Mustang GT",
+        "description": "A classic American muscle car with a powerful V8 engine",
+        "brand": "Ford",
+        "model": "Mustang GT",
+        "price": 30000,
+        "manufactureYear": 2005,
+        "image": "/ford mustang 2005.jpg"
+    },
+    {
+        "name": "Chevrolet Camaro SS",
+        "description": "A bold muscle car offering aggressive styling and strong performance",
+        "brand": "Chevrolet",
+        "model": "Camaro SS",
+        "price": 32000,
+        "manufactureYear": 2010,
+        "image": "/chevrolet camaro 2010.jpg"
+    },
+    {
+        "name": "BMW M3 E46",
+        "description": "A balanced sports sedan known for its precision handling and inline-six engine",
+        "brand": "BMW",
+        "model": "M3 E46",
+        "price": 28000,
+        "manufactureYear": 2002,
+        "image": "/bmw m3 e46.jpg"
+    },
+    {
+        "name": "Audi RS4 B7",
+        "description": "A high-performance wagon with a naturally aspirated V8 engine",
+        "brand": "Audi",
+        "model": "RS4 B7",
+        "price": 35000,
+        "manufactureYear": 2007,
+        "image": "/audi rs4 2007.jpg"
+    },
+    {
+        "name": "Subaru Impreza WRX STI",
+        "description": "A rally-inspired performance car with all-wheel drive capability",
+        "brand": "Subaru",
+        "model": "WRX STI",
+        "price": 27000,
+        "manufactureYear": 2006,
+        "image": "/subaru wrx sti 2006.jpg"
+    },
+    {
+        "name": "Mitsubishi Lancer Evolution IX",
+        "description": "A turbocharged AWD sedan with strong motorsport heritage",
+        "brand": "Mitsubishi",
+        "model": "Lancer Evolution IX",
+        "price": 29000,
+        "manufactureYear": 2005,
+        "image": "/lancer evo 9.jpg"
+    },
+    {
+        "name": "Porsche 911 Carrera",
+        "description": "A timeless sports car combining performance with everyday usability",
+        "brand": "Porsche",
+        "model": "911 Carrera",
+        "price": 70000,
+        "manufactureYear": 2012,
+        "image": "/porsche 911 2012.jpg"
+    },
+    {
+        "name": "Mercedes-Benz C63 AMG",
+        "description": "A luxury performance sedan with a thunderous V8 engine",
+        "brand": "Mercedes-Benz",
+        "model": "C63 AMG",
+        "price": 50000,
+        "manufactureYear": 2013,
+        "image": "/c63 amg 2013.jpg"
+    },
+    {
+        "name": "Volkswagen Golf GTI",
+        "description": "A practical hot hatch offering fun driving dynamics",
+        "brand": "Volkswagen",
+        "model": "Golf GTI",
+        "price": 22000,
+        "manufactureYear": 2015,
+        "image": "/golf gti 2015.jpg"
+    },
+    {
+        "name": "Mazda RX-7 FD",
+        "description": "A lightweight sports car powered by a unique rotary engine",
+        "brand": "Mazda",
+        "model": "RX-7 FD",
+        "price": 40000,
+        "manufactureYear": 1995,
+        "image": "/mazda rx7 1995.jpg"
+    },
+    {
+        "name": "Toyota AE86",
+        "description": "A lightweight rear-wheel-drive coupe popular in drifting culture",
+        "brand": "Toyota",
+        "model": "AE86",
+        "price": 20000,
+        "manufactureYear": 1986,
+        "image": "/toyota ae86.jpg"
+    },
+    {
+        "name": "Nissan 350Z",
+        "description": "A modern sports coupe with strong V6 performance",
+        "brand": "Nissan",
+        "model": "350Z",
+        "price": 18000,
+        "manufactureYear": 2004,
+        "image": "/nissan 350z.jpg"
+    },
+    {
+        "name": "Honda S2000",
+        "description": "A high-revving roadster with exceptional handling",
+        "brand": "Honda",
+        "model": "S2000",
+        "price": 30000,
+        "manufactureYear": 2003,
+        "image": "/honda s2000.jpg"
+    },
+    {
+        "name": "Ford Focus RS",
+        "description": "A hot hatch with all-wheel drive and aggressive styling",
+        "brand": "Ford",
+        "model": "Focus RS",
+        "price": 35000,
+        "manufactureYear": 2017,
+        "image": "/focus rs.jpg"
+    },
+    {
+        "name": "Chevrolet Corvette C6",
+        "description": "A powerful American sports car with a V8 engine",
+        "brand": "Chevrolet",
+        "model": "Corvette C6",
+        "price": 45000,
+        "manufactureYear": 2008,
+        "image": "/corvette c6.jpg"
+    },
+    {
+        "name": "BMW M5 E60",
+        "description": "A high-performance sedan with a screaming V10 engine",
+        "brand": "BMW",
+        "model": "M5 E60",
+        "price": 40000,
+        "manufactureYear": 2006,
+        "image": "/bmw m5 e60.jpg"
+    },
+    {
+        "name": "Audi R8",
+        "description": "A mid-engine supercar combining luxury and performance",
+        "brand": "Audi",
+        "model": "R8",
+        "price": 90000,
+        "manufactureYear": 2014,
+        "image": "/audi r8.jpg"
+    },
+    {
+        "name": "Subaru BRZ",
+        "description": "A lightweight sports coupe focused on driving enjoyment",
+        "brand": "Subaru",
+        "model": "BRZ",
+        "price": 26000,
+        "manufactureYear": 2016,
+        "image": "/subaru brz.jpg"
+    },
+    {
+        "name": "Toyota GT86",
+        "description": "A driver-focused coupe with rear-wheel drive dynamics",
+        "brand": "Toyota",
+        "model": "GT86",
+        "price": 25000,
+        "manufactureYear": 2016,
+        "image": "/toyota gt86.jpg"
+    },
+    {
+        "name": "Nissan Silvia S15",
+        "description": "A stylish and popular drift car with turbocharged power",
+        "brand": "Nissan",
+        "model": "Silvia S15",
+        "price": 30000,
+        "manufactureYear": 2000,
+        "image": "/silvia s15.jpg"
+    },
+    {
+        "name": "Honda Integra Type R",
+        "description": "A legendary front-wheel-drive performance car",
+        "brand": "Honda",
+        "model": "Integra Type R",
+        "price": 27000,
+        "manufactureYear": 1998,
+        "image": "/integra type r.jpg"
+    },
+    {
+        "name": "Ford GT",
+        "description": "A modern supercar inspired by the legendary GT40",
+        "brand": "Ford",
+        "model": "GT",
+        "price": 250000,
+        "manufactureYear": 2018,
+        "image": "/ford gt.jpg"
+    },
+    {
+        "name": "Chevrolet Impala SS",
+        "description": "A full-size sedan with classic American muscle performance",
+        "brand": "Chevrolet",
+        "model": "Impala SS",
+        "price": 20000,
+        "manufactureYear": 1996,
+        "image": "/impala ss.jpg"
+    },
+    {
+        "name": "BMW Z4",
+        "description": "A sporty roadster combining comfort and performance",
+        "brand": "BMW",
+        "model": "Z4",
+        "price": 28000,
+        "manufactureYear": 2011,
+        "image": "/bmw z4.jpg"
+    },
+    {
+        "name": "Audi TT",
+        "description": "A compact sports car with distinctive design",
+        "brand": "Audi",
+        "model": "TT",
+        "price": 24000,
+        "manufactureYear": 2012,
+        "image": "/audi tt.jpg"
+    },
+    {
+        "name": "Subaru Legacy GT",
+        "description": "A sleeper sedan with turbocharged performance",
+        "brand": "Subaru",
+        "model": "Legacy GT",
+        "price": 15000,
+        "manufactureYear": 2008,
+        "image": "/legacy gt.jpg"
+    },
+    {
+        "name": "Mitsubishi Eclipse GSX",
+        "description": "A turbo AWD coupe popular in the tuning scene",
+        "brand": "Mitsubishi",
+        "model": "Eclipse GSX",
+        "price": 18000,
+        "manufactureYear": 1999,
+        "image": "/eclipse gsx.jpg"
     }
 ]
