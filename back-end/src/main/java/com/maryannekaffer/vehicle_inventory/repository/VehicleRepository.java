@@ -14,12 +14,12 @@ import com.maryannekaffer.vehicle_inventory.entity.Vehicle;
 @Repository
 public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
         @Query("""
-                        SELECT v FROM Vehicle v
-                        WHERE (:name IS NULL OR LOWER(v.name) LIKE LOWER(CONCAT('%', :name, '%')))
-                        AND (:brand IS NULL OR LOWER(v.brand) LIKE LOWER(CONCAT('%', :brand, '%')))
-                        AND (:model IS NULL OR LOWER(v.model) LIKE LOWER(CONCAT('%', :model, '%')))
-                        AND (:manufactureYear IS NULL OR CAST(v.manufactureYear AS string) LIKE CONCAT('%', :manufactureYear, '%'))
-                        AND (:price IS NULL OR CAST(v.price AS string) LIKE CONCAT('%', :price, '%'))
+                            SELECT v FROM Vehicle v
+                            WHERE (:name IS NULL OR LOWER(v.name) LIKE LOWER(CONCAT('%', :name, '%')))
+                            AND (:brand IS NULL OR LOWER(v.brand) LIKE LOWER(CONCAT('%', :brand, '%')))
+                            AND (:model IS NULL OR LOWER(v.model) LIKE LOWER(CONCAT('%', :model, '%')))
+                            AND (:manufactureYear IS NULL OR v.manufactureYear = :manufactureYear)
+                            AND (:price IS NULL OR v.price = :price)
                         """)
         Page<Vehicle> findByFilters(
                         @Param("name") String name,

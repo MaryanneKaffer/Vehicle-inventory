@@ -8,7 +8,6 @@ import java.nio.file.Paths;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -33,7 +32,6 @@ public class VehicleController {
     private VehicleRepository repository;
 
     @GetMapping("/get")
-    @Cacheable("vehicles")
     public Page<Vehicle> getAll(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String brand,
@@ -43,7 +41,7 @@ public class VehicleController {
             @RequestParam(required = false) String image,
             Pageable pageable) {
 
-        return repository.findAll(pageable);
+        return repository.findByFilters(name, brand, model, manufactureYear, price, pageable);
     }
 
     @GetMapping("/{id}")
