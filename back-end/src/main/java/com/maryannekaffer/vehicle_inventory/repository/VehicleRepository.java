@@ -15,9 +15,9 @@ import com.maryannekaffer.vehicle_inventory.entity.Vehicle;
 public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
         @Query("""
                             SELECT v FROM Vehicle v
-                            WHERE (:name IS NULL OR LOWER(v.name) LIKE LOWER(CONCAT('%', :name, '%')))
-                            AND (:brand IS NULL OR LOWER(v.brand) LIKE LOWER(CONCAT('%', :brand, '%')))
-                            AND (:model IS NULL OR LOWER(v.model) LIKE LOWER(CONCAT('%', :model, '%')))
+                            WHERE (CAST(:name AS string) IS NULL OR LOWER(v.name) LIKE LOWER(CONCAT('%', CAST(:name AS string), '%')))
+                            AND (CAST(:brand AS string) IS NULL OR LOWER(v.brand) LIKE LOWER(CONCAT('%', CAST(:brand AS string), '%')))
+                            AND (CAST(:model AS string) IS NULL OR LOWER(v.model) LIKE LOWER(CONCAT('%', CAST(:model AS string), '%')))
                             AND (:manufactureYear IS NULL OR v.manufactureYear = :manufactureYear)
                             AND (:price IS NULL OR v.price = :price)
                         """)

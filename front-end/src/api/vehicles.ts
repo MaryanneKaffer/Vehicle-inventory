@@ -15,24 +15,39 @@ export const GetVehicles = async ({ filter, page, setMessage, setLoading, setVeh
     filter: string, page: number, setMessage: (message: string) => void, setLoading: (loading: boolean) => void, setVehicles: (vehicles: Vehicle[]) => void,
     setApiLength: (length: number) => void, setApiPages: (pages: number) => void
 }) => {
-    setMessage("")
+    setMessage("");
     setLoading(true);
+
     try {
         const response = await fetch(`${API_URL}/vehicles/get?${filter}&page=${page - 1}&size=20`);
-        const data = await response.json();
-        setVehicles(data.content);
-        setApiLength(data.totalElements);
-        setApiPages(data.totalPages);
 
-        if (data.content.length === 0) {
+        if (!response.ok) {
+            throw new Error(`Server error: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        const content = data?.content || [];
+        const totalElements = data?.totalElements || 0;
+        const totalPages = data?.totalPages || 0;
+
+        setVehicles(content);
+        setApiLength(totalElements);
+        setApiPages(totalPages);
+
+        if (content.length === 0) {
             setMessage("No vehicles found.");
         }
-        setLoading(false);
+
     } catch (error) {
         console.error("Error fetching vehicles:", error);
-        setMessage("Error fetching vehicles. Please try again.");
+        setMessage("Error fetching vehicles.");
+        setVehicles([]);
+        setApiLength(0);
+        setApiPages(0);
+    } finally {
+        setLoading(false);
     }
-    setLoading(false);
 };
 
 export async function GetVehicleById(id: number, setVehicle: (vehicle: Vehicle) => void) {
