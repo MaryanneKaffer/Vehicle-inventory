@@ -12,7 +12,7 @@ export default function VehiclesList({ vehicles, loading, message, apiPages, set
 }) {
 
     return (
-        <div className={`w-full h-full flex flex-col gap-2 sm:gap-4  ${apiPages < 2 ? "h-full" : "min-h-[1000px]"}`}>
+        <div className={`w-full flex flex-col gap-2 sm:gap-4  ${apiPages < 2 ? "h-full" : "min-h-[1000px]"}`}>
             {message ? (
                 <p className="text-center text-red-500">{message}</p>
             ) :
@@ -27,7 +27,7 @@ export default function VehiclesList({ vehicles, loading, message, apiPages, set
                             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                                 key={vehicle.id} className="group flex flex-col bg-default/70 rounded-[3px] sm:p-3 p-2 xl:h-[300px] transition-all hover:scale-[1.01] relative">
                                 {vehicle.image ? (
-                                    <img src={`${API_URL}/uploads/${vehicle.image}`} alt={`${vehicle.brand} ${vehicle.model}`}
+                                    <img loading="lazy" src={`${API_URL}/uploads/${vehicle.image}`} alt={`${vehicle.brand} ${vehicle.model}`}
                                         className="md:h-35 h-30 w-full object-cover rounded-[3px] mb-2" />
                                 ) : (
                                     <IoCarSport className="md:h-35 h-30 w-full object-cover rounded-[3px] mb-2 bg-warning text-white" />

@@ -1,4 +1,4 @@
-import SearchInput from "../ui/searchInput";
+import SearchInput from "../utils/searchInput";
 
 export default function SearchComponent({ setFilter }: { setFilter: React.Dispatch<React.SetStateAction<string[]>> }) {
     const fields = ["name", "brand", "model", "price", "manufactureYear"];

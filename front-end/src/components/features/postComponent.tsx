@@ -4,7 +4,8 @@ import ControllerInput from "../ui/controllerInput";
 import { useForm } from "react-hook-form";
 import { PostVehicle } from "@/api/vehicles";
 import { Input } from "@heroui/input";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { convertToVehicleFormData } from "../utils/convertToVehicle";
 
 export default function PostComponent({ setPage }: { setPage: (pages: number) => void }) {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -12,32 +13,31 @@ export default function PostComponent({ setPage }: { setPage: (pages: number) =>
     const fileRef = useRef<HTMLInputElement | null>(null);
     const [preview, setPreview] = useState<string | null>(null);
     const { ref, onChange, ...rest } = register("image");
+    const [loading, setLoading] = useState(Boolean);
     const fields = [{ name: "name", type: "text" }, { name: "brand", type: "text" }, { name: "model", type: "text" }, { name: "price", type: "number" },
     { name: "manufactureYear", type: "number" }, { name: "description", type: "textarea" }, { name: "image", type: "file" }];
 
-    function onSubmit(data: any) {
-        const formData = new FormData();
-
-        formData.append("name", data.name);
-        formData.append("description", data.description);
-        formData.append("brand", data.brand);
-        formData.append("model", data.model);
-        formData.append("price", data.price);
-        formData.append("manufactureYear", data.manufactureYear);
-
-        if (data.image && data.image[0]) {
-            formData.append("image", data.image[0]);
+    async function onSubmit(data: any) {
+        setLoading(true);
+        try {
+            const formData = convertToVehicleFormData(data);
+            await PostVehicle(formData);
+            reset(); setPreview(null);
+            setPage(1);
+        } catch (error) {
+            console.error("Error trying to post data", error);
+        } finally {
+            onOpenChange(); setLoading(false);
         }
-
-        PostVehicle(formData);
-        reset(); formData.delete("image"); setPreview(null);
-        setPage(1);
-        onOpenChange();
     }
+
+    useEffect(() => {
+        if (!isOpen) { reset(); }
+    }, [isOpen, reset]);
+
     return (
         <div >
             <Button variant="ghost" color="warning" className="w-full rounded-sm" radius="none" onPress={onOpen} > Register a Vehicle </Button>
-
             <Modal isOpen={isOpen} onOpenChange={onOpenChange} radius="none" className="rounded-sm" backdrop="blur" size="2xl">
                 <ModalContent className="items-center flex-1">
                     <ModalHeader className="flex flex-col gap-1 text-center cursor-default text-warning">Register a Vehicle</ModalHeader>
@@ -54,7 +54,8 @@ export default function PostComponent({ setPage }: { setPage: (pages: number) =>
                                             setPreview(URL.createObjectURL(file));
                                         }
                                     }} />
-                                <div className="h-[192px] relative md:mb-2 md:w-[250px] group border-2 border-warning flex items-center justify-center cursor-pointer overflow-hidden rounded-sm" onClick={() => fileRef.current?.click()} >
+                                <div className="h-[192px] relative md:mb-2 md:w-[250px] group border-2 border-warning flex items-center justify-center cursor-pointer overflow-hidden rounded-sm"
+                                    onClick={() => fileRef.current?.click()} >
                                     {preview ? (<>
                                         <img src={preview} className="transition-all object-cover w-full max-h-[100%]" />
                                         <span className="text-warning absolute opacity-0 group-hover:opacity-100 transition-all h-full w-full bg-black/70 backdrop-blur-sm">
@@ -75,7 +76,7 @@ export default function PostComponent({ setPage }: { setPage: (pages: number) =>
                                     ))}
                                 </div>
                                 <ControllerInput fieldName={fields[5].name} fieldType={fields[5].type} control={control} register={register} />
-                                <Button color="warning" radius="none" variant="ghost" type="submit" className="mb-2 rounded-sm">
+                                <Button color="warning" isLoading={loading} radius="none" variant="ghost" type="submit" className="mb-2 rounded-sm">
                                     Register
                                 </Button>
                             </div >
