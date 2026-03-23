@@ -6,7 +6,7 @@
         "model": "Mazda MX-5 (NA)",
         "price": 13000,
         "manufactureYear": 1990,
-        "image": "/Mazda Miata 1990.jpg"
+        "image": ""
     },
     {
         "name": "Toyota Supra MK4",
@@ -15,7 +15,7 @@
         "model": "Supra MK4",
         "price": 45000,
         "manufactureYear": 1994,
-        "image": "/toyota supra 1994.jpg"
+        "image": ""
     },
     {
         "name": "Nissan Skyline GT-R R34",
@@ -24,7 +24,7 @@
         "model": "Skyline GT-R R34",
         "price": 60000,
         "manufactureYear": 1999,
-        "image": "/nissan skyline r34.jpg"
+        "image": ""
     },
     {
         "name": "Honda Civic Type R EK9",
@@ -33,7 +33,7 @@
         "model": "Civic Type R EK9",
         "price": 25000,
         "manufactureYear": 1997,
-        "image": "/honda civic ek9.jpg"
+        "image": ""
     },
     {
         "name": "Ford Mustang GT",
@@ -42,7 +42,7 @@
         "model": "Mustang GT",
         "price": 30000,
         "manufactureYear": 2005,
-        "image": "/ford mustang 2005.jpg"
+        "image": ""
     },
     {
         "name": "Chevrolet Camaro SS",
@@ -51,7 +51,7 @@
         "model": "Camaro SS",
         "price": 32000,
         "manufactureYear": 2010,
-        "image": "/chevrolet camaro 2010.jpg"
+        "image": ""
     },
     {
         "name": "BMW M3 E46",
@@ -60,7 +60,7 @@
         "model": "M3 E46",
         "price": 28000,
         "manufactureYear": 2002,
-        "image": "/bmw m3 e46.jpg"
+        "image": ""
     },
     {
         "name": "Audi RS4 B7",
@@ -69,7 +69,7 @@
         "model": "RS4 B7",
         "price": 35000,
         "manufactureYear": 2007,
-        "image": "/audi rs4 2007.jpg"
+        "image": ""
     },
     {
         "name": "Subaru Impreza WRX STI",
@@ -78,7 +78,7 @@
         "model": "WRX STI",
         "price": 27000,
         "manufactureYear": 2006,
-        "image": "/subaru wrx sti 2006.jpg"
+        "image": ""
     },
     {
         "name": "Mitsubishi Lancer Evolution IX",
@@ -87,7 +87,7 @@
         "model": "Lancer Evolution IX",
         "price": 29000,
         "manufactureYear": 2005,
-        "image": "/lancer evo 9.jpg"
+        "image": ""
     },
     {
         "name": "Porsche 911 Carrera",
@@ -96,7 +96,7 @@
         "model": "911 Carrera",
         "price": 70000,
         "manufactureYear": 2012,
-        "image": "/porsche 911 2012.jpg"
+        "image": ""
     },
     {
         "name": "Mercedes-Benz C63 AMG",
@@ -105,7 +105,7 @@
         "model": "C63 AMG",
         "price": 50000,
         "manufactureYear": 2013,
-        "image": "/c63 amg 2013.jpg"
+        "image": ""
     },
     {
         "name": "Volkswagen Golf GTI",
@@ -114,7 +114,7 @@
         "model": "Golf GTI",
         "price": 22000,
         "manufactureYear": 2015,
-        "image": "/golf gti 2015.jpg"
+        "image": ""
     },
     {
         "name": "Mazda RX-7 FD",
@@ -123,7 +123,7 @@
         "model": "RX-7 FD",
         "price": 40000,
         "manufactureYear": 1995,
-        "image": "/mazda rx7 1995.jpg"
+        "image": ""
     },
     {
         "name": "Toyota AE86",
@@ -132,7 +132,7 @@
         "model": "AE86",
         "price": 20000,
         "manufactureYear": 1986,
-        "image": "/toyota ae86.jpg"
+        "image": ""
     },
     {
         "name": "Nissan 350Z",
@@ -141,7 +141,7 @@
         "model": "350Z",
         "price": 18000,
         "manufactureYear": 2004,
-        "image": "/nissan 350z.jpg"
+        "image": ""
     },
     {
         "name": "Honda S2000",
@@ -150,7 +150,7 @@
         "model": "S2000",
         "price": 30000,
         "manufactureYear": 2003,
-        "image": "/honda s2000.jpg"
+        "image": ""
     },
     {
         "name": "Ford Focus RS",
@@ -159,7 +159,7 @@
         "model": "Focus RS",
         "price": 35000,
         "manufactureYear": 2017,
-        "image": "/focus rs.jpg"
+        "image": ""
     },
     {
         "name": "Chevrolet Corvette C6",
@@ -168,7 +168,7 @@
         "model": "Corvette C6",
         "price": 45000,
         "manufactureYear": 2008,
-        "image": "/corvette c6.jpg"
+        "image": ""
     },
     {
         "name": "BMW M5 E60",
@@ -177,7 +177,7 @@
         "model": "M5 E60",
         "price": 40000,
         "manufactureYear": 2006,
-        "image": "/bmw m5 e60.jpg"
+        "image": ""
     },
     {
         "name": "Audi R8",
@@ -186,7 +186,7 @@
         "model": "R8",
         "price": 90000,
         "manufactureYear": 2014,
-        "image": "/audi r8.jpg"
+        "image": ""
     },
     {
         "name": "Subaru BRZ",
@@ -195,7 +195,7 @@
         "model": "BRZ",
         "price": 26000,
         "manufactureYear": 2016,
-        "image": "/subaru brz.jpg"
+        "image": ""
     },
     {
         "name": "Toyota GT86",
@@ -204,7 +204,7 @@
         "model": "GT86",
         "price": 25000,
         "manufactureYear": 2016,
-        "image": "/toyota gt86.jpg"
+        "image": ""
     },
     {
         "name": "Nissan Silvia S15",
@@ -213,7 +213,7 @@
         "model": "Silvia S15",
         "price": 30000,
         "manufactureYear": 2000,
-        "image": "/silvia s15.jpg"
+        "image": ""
     },
     {
         "name": "Honda Integra Type R",
@@ -222,7 +222,7 @@
         "model": "Integra Type R",
         "price": 27000,
         "manufactureYear": 1998,
-        "image": "/integra type r.jpg"
+        "image": ""
     },
     {
         "name": "Ford GT",
@@ -231,7 +231,7 @@
         "model": "GT",
         "price": 250000,
         "manufactureYear": 2018,
-        "image": "/ford gt.jpg"
+        "image": ""
     },
     {
         "name": "Chevrolet Impala SS",
@@ -240,7 +240,7 @@
         "model": "Impala SS",
         "price": 20000,
         "manufactureYear": 1996,
-        "image": "/impala ss.jpg"
+        "image": ""
     },
     {
         "name": "BMW Z4",
@@ -249,7 +249,7 @@
         "model": "Z4",
         "price": 28000,
         "manufactureYear": 2011,
-        "image": "/bmw z4.jpg"
+        "image": ""
     },
     {
         "name": "Audi TT",
@@ -258,7 +258,7 @@
         "model": "TT",
         "price": 24000,
         "manufactureYear": 2012,
-        "image": "/audi tt.jpg"
+        "image": ""
     },
     {
         "name": "Subaru Legacy GT",
@@ -267,7 +267,7 @@
         "model": "Legacy GT",
         "price": 15000,
         "manufactureYear": 2008,
-        "image": "/legacy gt.jpg"
+        "image": ""
     },
     {
         "name": "Mitsubishi Eclipse GSX",
@@ -276,6 +276,6 @@
         "model": "Eclipse GSX",
         "price": 18000,
         "manufactureYear": 1999,
-        "image": "/eclipse gsx.jpg"
+        "image": ""
     }
 ]
