@@ -2,9 +2,7 @@ package com.maryannekaffer.vehicle_inventory.controller;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -20,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.maryannekaffer.vehicle_inventory.entity.Vehicle;
 import com.maryannekaffer.vehicle_inventory.repository.VehicleRepository;
 
@@ -30,6 +30,9 @@ public class VehicleController {
 
     @Autowired
     private VehicleRepository repository;
+
+    @Autowired
+    private Cloudinary cloudinary;
 
     @GetMapping("/get")
     public Page<Vehicle> getAll(
@@ -62,7 +65,6 @@ public class VehicleController {
             @RequestParam(required = false) MultipartFile image) throws IOException {
 
         Vehicle vehicle = new Vehicle();
-
         vehicle.setName(name);
         vehicle.setDescription(description);
         vehicle.setBrand(brand);
@@ -71,35 +73,35 @@ public class VehicleController {
         vehicle.setManufactureYear(manufactureYear);
 
         if (image != null && !image.isEmpty()) {
-
-            String fileName = image.getOriginalFilename();
-
-            Path uploadPath = Paths.get("uploads");
-
-            if (!Files.exists(uploadPath)) {
-                Files.createDirectories(uploadPath);
-            }
-
-            Files.write(uploadPath.resolve(fileName), image.getBytes());
-
-            vehicle.setImage(fileName);
+            Map<?, ?> uploadResult = cloudinary.uploader().upload(image.getBytes(), ObjectUtils.emptyMap());
+            String imageUrl = uploadResult.get("secure_url").toString();
+            vehicle.setImage(imageUrl);
         }
-
         return repository.save(vehicle);
     }
 
     @DeleteMapping("/delete/{id}")
+    @CacheEvict(value = "vehicles", allEntries = true)
     public Vehicle delete(@PathVariable Long id) throws IOException {
-
         Vehicle vehicle = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Vehicle not found"));
 
-        if (vehicle.getImage() != null) {
-            Path imagePath = Paths.get("uploads").resolve(vehicle.getImage());
-            Files.deleteIfExists(imagePath);
-        }
+        if (id > 31 && vehicle.getImage() != null && !vehicle.getImage().isEmpty()) {
+            try {
+                String url = vehicle.getImage();
+                String publicId = extractPublicId(url);
 
+                cloudinary.uploader().destroy(publicId, ObjectUtils.emptyMap());
+            } catch (IOException e) {
+                System.err.println("Error: " + e.getMessage());
+            }
+        }
         repository.delete(vehicle);
         return vehicle;
+    }
+
+    private String extractPublicId(String url) {
+        String fileName = url.substring(url.lastIndexOf("/") + 1);
+        return fileName.substring(0, fileName.lastIndexOf("."));
     }
 }

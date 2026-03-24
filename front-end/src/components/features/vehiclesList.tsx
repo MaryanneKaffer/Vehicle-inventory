@@ -4,7 +4,6 @@ import DeleteComponent from "./deleteComponent";
 import { IoCarSport } from "react-icons/io5";
 import { motion } from "framer-motion";
 import ViewComponent from "./viewComponent";
-const API_URL = import.meta.env.VITE_API_URL;
 
 export default function VehiclesList({ vehicles, loading, message, apiPages, setPage, screen, mbDelete, mbView }: {
     setApiLength: (length: number) => void, setPage: (page: number) => void, vehicles: Vehicle[],
@@ -27,7 +26,7 @@ export default function VehiclesList({ vehicles, loading, message, apiPages, set
                             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                                 key={vehicle.id} className="group flex flex-col bg-default/70 rounded-[3px] sm:p-3 p-2 xl:h-[300px] transition-all hover:scale-[1.01] relative">
                                 {vehicle.image ? (
-                                    <img loading="lazy" src={`${API_URL}/uploads/${vehicle.image}`} alt={`${vehicle.brand} ${vehicle.model}`}
+                                    <img loading="lazy" src={vehicle.image} alt={`${vehicle.brand} ${vehicle.model}`}
                                         className="md:h-35 h-30 w-full object-cover rounded-[3px] mb-2" />
                                 ) : (
                                     <IoCarSport className="md:h-35 h-30 w-full object-cover rounded-[3px] mb-2 bg-warning text-white" />

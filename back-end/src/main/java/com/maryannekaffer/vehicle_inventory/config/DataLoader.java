@@ -17,6 +17,7 @@ import tools.jackson.databind.ObjectMapper;
 public class DataLoader {
 
     @Bean
+    @SuppressWarnings("unused")
     CommandLineRunner loadData(VehicleRepository repository) {
         return args -> {
 
