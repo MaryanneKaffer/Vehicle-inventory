@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cloudinary.Cloudinary;
+import com.cloudinary.Transformation;
 import com.cloudinary.utils.ObjectUtils;
 import com.maryannekaffer.vehicle_inventory.entity.Vehicle;
 import com.maryannekaffer.vehicle_inventory.repository.VehicleRepository;
@@ -73,7 +74,15 @@ public class VehicleController {
         vehicle.setManufactureYear(manufactureYear);
 
         if (image != null && !image.isEmpty()) {
-            Map<?, ?> uploadResult = cloudinary.uploader().upload(image.getBytes(), ObjectUtils.emptyMap());
+            Map<?, ?> uploadResult = cloudinary.uploader().upload(image.getBytes(),
+                    ObjectUtils.asMap(
+                            "transformation", new Transformation<>()
+                                    .width(600)
+                                    .height(350)
+                                    .crop("fill")
+                                    .quality("auto")
+                                    .fetchFormat("auto")
+                    ));
             String imageUrl = uploadResult.get("secure_url").toString();
             vehicle.setImage(imageUrl);
         }

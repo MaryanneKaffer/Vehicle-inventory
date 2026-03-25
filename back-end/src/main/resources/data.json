@@ -6,7 +6,7 @@
         "model": "Mazda MX-5 (NA)",
         "price": 13000,
         "manufactureYear": 1990,
-        "image": ""
+        "image": "https://res.cloudinary.com/dn2zeoaki/image/upload/v1774399594/mazdaMiata_xjwqel.avif"
     },
     {
         "name": "Toyota Supra MK4",
@@ -15,7 +15,7 @@
         "model": "Supra MK4",
         "price": 45000,
         "manufactureYear": 1994,
-        "image": ""
+        "image": "https://res.cloudinary.com/dn2zeoaki/image/upload/v1774399727/1997toyotaSupra_cgnvwq.jpg"
     },
     {
         "name": "Nissan Skyline GT-R R34",
@@ -24,7 +24,7 @@
         "model": "Skyline GT-R R34",
         "price": 60000,
         "manufactureYear": 1999,
-        "image": ""
+        "image": "https://res.cloudinary.com/dn2zeoaki/image/upload/v1774399829/NissaSkylineGT-RR34_pgjwde.webp"
     },
     {
         "name": "Honda Civic Type R EK9",
@@ -33,7 +33,7 @@
         "model": "Civic Type R EK9",
         "price": 25000,
         "manufactureYear": 1997,
-        "image": ""
+        "image": "https://res.cloudinary.com/dn2zeoaki/image/upload/v1774399926/HondaCivicTypeREK_tiynvg.webp"
     },
     {
         "name": "Ford Mustang GT",
@@ -42,7 +42,7 @@
         "model": "Mustang GT",
         "price": 30000,
         "manufactureYear": 2005,
-        "image": ""
+        "image": "https://res.cloudinary.com/dn2zeoaki/image/upload/v1774400032/FordMustangGT_xj86bg.webp"
     },
     {
         "name": "Chevrolet Camaro SS",
@@ -51,7 +51,7 @@
         "model": "Camaro SS",
         "price": 32000,
         "manufactureYear": 2010,
-        "image": ""
+        "image": "https://res.cloudinary.com/dn2zeoaki/image/upload/v1774400260/ChevroletCamaroSS_ixmehb.jpg"
     },
     {
         "name": "BMW M3 E46",
@@ -60,7 +60,7 @@
         "model": "M3 E46",
         "price": 28000,
         "manufactureYear": 2002,
-        "image": ""
+        "image": "https://res.cloudinary.com/dn2zeoaki/image/upload/v1774400314/BMWM3E46_lmswli.webp"
     },
     {
         "name": "Audi RS4 B7",
@@ -69,7 +69,7 @@
         "model": "RS4 B7",
         "price": 35000,
         "manufactureYear": 2007,
-        "image": ""
+        "image": "https://res.cloudinary.com/dn2zeoaki/image/upload/v1774400601/AudiRS4B7_qzdslo.jpg"
     },
     {
         "name": "Subaru Impreza WRX STI",
@@ -78,7 +78,7 @@
         "model": "WRX STI",
         "price": 27000,
         "manufactureYear": 2006,
-        "image": ""
+        "image": "https://res.cloudinary.com/dn2zeoaki/image/upload/v1774401089/SubaruImprezaWRXSTI_ymahcf.jpg"
     },
     {
         "name": "Mitsubishi Lancer Evolution IX",
@@ -87,7 +87,7 @@
         "model": "Lancer Evolution IX",
         "price": 29000,
         "manufactureYear": 2005,
-        "image": ""
+        "image": "https://res.cloudinary.com/dn2zeoaki/image/upload/v1774467288/MitsubishiLancerEvolutionIX_forc1z.webp"
     },
     {
         "name": "Porsche 911 Carrera",
@@ -96,7 +96,7 @@
         "model": "911 Carrera",
         "price": 70000,
         "manufactureYear": 2012,
-        "image": ""
+        "image": "https://res.cloudinary.com/dn2zeoaki/image/upload/v1774467514/Porsche911Carrera_v1jxbp.jpg"
     },
     {
         "name": "Mercedes-Benz C63 AMG",
@@ -105,7 +105,7 @@
         "model": "C63 AMG",
         "price": 50000,
         "manufactureYear": 2013,
-        "image": ""
+        "image": "https://res.cloudinary.com/dn2zeoaki/image/upload/v1774467756/Mercedes-BenzC63AMG_dxbgbi.jpg"
     },
     {
         "name": "Volkswagen Golf GTI",
@@ -114,7 +114,7 @@
         "model": "Golf GTI",
         "price": 22000,
         "manufactureYear": 2015,
-        "image": ""
+        "image": "https://res.cloudinary.com/dn2zeoaki/image/upload/v1774467931/VolkswagenGolfGTI_jjy21c.webp"
     },
     {
         "name": "Mazda RX-7 FD",
@@ -123,7 +123,7 @@
         "model": "RX-7 FD",
         "price": 40000,
         "manufactureYear": 1995,
-        "image": ""
+        "image": "https://res.cloudinary.com/dn2zeoaki/image/upload/v1774468222/MazdaRX-7FD_lb9uz5.jpg"
     },
     {
         "name": "Toyota AE86",
@@ -132,7 +132,7 @@
         "model": "AE86",
         "price": 20000,
         "manufactureYear": 1986,
-        "image": ""
+        "image": "https://res.cloudinary.com/dn2zeoaki/image/upload/v1774468608/ToyotaAE86_znmq7g.jpg"
     },
     {
         "name": "Nissan 350Z",
@@ -141,7 +141,7 @@
         "model": "350Z",
         "price": 18000,
         "manufactureYear": 2004,
-        "image": ""
+        "image": "https://res.cloudinary.com/dn2zeoaki/image/upload/v1774468701/Nissan350Z_fnytet.jpg"
     },
     {
         "name": "Honda S2000",
@@ -150,7 +150,7 @@
         "model": "S2000",
         "price": 30000,
         "manufactureYear": 2003,
-        "image": ""
+        "image": "https://res.cloudinary.com/dn2zeoaki/image/upload/v1774469207/copy_of_hondas2000_hlbbfa_3975c0.jpg"
     },
     {
         "name": "Ford Focus RS",
@@ -159,7 +159,7 @@
         "model": "Focus RS",
         "price": 35000,
         "manufactureYear": 2017,
-        "image": ""
+        "image": "https://res.cloudinary.com/dn2zeoaki/image/upload/v1774470388/FordFocusRS_krzf1c.jpg"
     },
     {
         "name": "Chevrolet Corvette C6",
@@ -168,7 +168,7 @@
         "model": "Corvette C6",
         "price": 45000,
         "manufactureYear": 2008,
-        "image": ""
+        "image": "https://res.cloudinary.com/dn2zeoaki/image/upload/v1774470443/ChevroletCorvetteC6_y46icb.jpg"
     },
     {
         "name": "BMW M5 E60",
@@ -177,7 +177,7 @@
         "model": "M5 E60",
         "price": 40000,
         "manufactureYear": 2006,
-        "image": ""
+        "image": "https://res.cloudinary.com/dn2zeoaki/image/upload/v1774470584/BMWM5E60_kp3cmh.jpg"
     },
     {
         "name": "Audi R8",
@@ -186,7 +186,7 @@
         "model": "R8",
         "price": 90000,
         "manufactureYear": 2014,
-        "image": ""
+        "image": "https://res.cloudinary.com/dn2zeoaki/image/upload/v1774470745/AudiR82014_oompjz.webp"
     },
     {
         "name": "Subaru BRZ",
@@ -195,7 +195,7 @@
         "model": "BRZ",
         "price": 26000,
         "manufactureYear": 2016,
-        "image": ""
+        "image": "https://res.cloudinary.com/dn2zeoaki/image/upload/v1774470832/SubaruBRZ_jgr6bt.avif"
     },
     {
         "name": "Toyota GT86",
@@ -204,7 +204,7 @@
         "model": "GT86",
         "price": 25000,
         "manufactureYear": 2016,
-        "image": ""
+        "image": "https://res.cloudinary.com/dn2zeoaki/image/upload/v1774470981/ToyotaGT86_nkar0a.webp"
     },
     {
         "name": "Nissan Silvia S15",
@@ -213,7 +213,7 @@
         "model": "Silvia S15",
         "price": 30000,
         "manufactureYear": 2000,
-        "image": ""
+        "image": "https://res.cloudinary.com/dn2zeoaki/image/upload/v1774471137/Nissan_Silvia_S15_knjnt1.jpg"
     },
     {
         "name": "Honda Integra Type R",
@@ -222,7 +222,7 @@
         "model": "Integra Type R",
         "price": 27000,
         "manufactureYear": 1998,
-        "image": ""
+        "image": "https://res.cloudinary.com/dn2zeoaki/image/upload/v1774471258/HondaIntegraTypeR_pvvwwh.avif"
     },
     {
         "name": "Ford GT",
@@ -231,7 +231,7 @@
         "model": "GT",
         "price": 250000,
         "manufactureYear": 2018,
-        "image": ""
+        "image": "https://res.cloudinary.com/dn2zeoaki/image/upload/v1774471760/FordGT_p4tjhw.webp"
     },
     {
         "name": "Chevrolet Impala SS",
@@ -240,7 +240,7 @@
         "model": "Impala SS",
         "price": 20000,
         "manufactureYear": 1996,
-        "image": ""
+        "image": "https://res.cloudinary.com/dn2zeoaki/image/upload/v1774471336/ChevroletImpalaSS_hxemxb.jpg"
     },
     {
         "name": "BMW Z4",
@@ -249,7 +249,7 @@
         "model": "Z4",
         "price": 28000,
         "manufactureYear": 2011,
-        "image": ""
+        "image": "https://res.cloudinary.com/dn2zeoaki/image/upload/v1774471422/BMWZ4_fwmdpq.webp"
     },
     {
         "name": "Audi TT",
@@ -258,7 +258,7 @@
         "model": "TT",
         "price": 24000,
         "manufactureYear": 2012,
-        "image": ""
+        "image": "https://res.cloudinary.com/dn2zeoaki/image/upload/v1774471490/AudiTT_iqypvh.jpg"
     },
     {
         "name": "Subaru Legacy GT",
@@ -267,7 +267,7 @@
         "model": "Legacy GT",
         "price": 15000,
         "manufactureYear": 2008,
-        "image": ""
+        "image": "https://res.cloudinary.com/dn2zeoaki/image/upload/v1774471555/SubaruLegacyGT_rl5yum.jpg"
     },
     {
         "name": "Mitsubishi Eclipse GSX",
@@ -276,6 +276,6 @@
         "model": "Eclipse GSX",
         "price": 18000,
         "manufactureYear": 1999,
-        "image": ""
+        "image": "https://res.cloudinary.com/dn2zeoaki/image/upload/v1774471628/MitsubishiEclipseGSX_vuzcg0.webp"
     }
 ]
