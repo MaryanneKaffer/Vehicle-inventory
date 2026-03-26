@@ -24,7 +24,7 @@ import com.cloudinary.utils.ObjectUtils;
 import com.maryannekaffer.vehicle_inventory.entity.Vehicle;
 import com.maryannekaffer.vehicle_inventory.repository.VehicleRepository;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "https://vehicle-inventory.vercel.app")
 @RestController
 @RequestMapping("/vehicles")
 public class VehicleController {
@@ -77,11 +77,11 @@ public class VehicleController {
             Map<?, ?> uploadResult = cloudinary.uploader().upload(image.getBytes(),
                     ObjectUtils.asMap(
                             "transformation", new Transformation<>()
-                                    .width(600)
-                                    .height(350)
+                                    .width(400)
+                                    .height(250)
                                     .crop("fill")
                                     .quality("auto")
-                                    .fetchFormat("auto")
+                                    .fetchFormat("avif")
                     ));
             String imageUrl = uploadResult.get("secure_url").toString();
             vehicle.setImage(imageUrl);
