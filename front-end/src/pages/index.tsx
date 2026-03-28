@@ -10,6 +10,7 @@ import { Button } from "@heroui/button";
 import { MdDelete } from "react-icons/md";
 import Resize from "@/components/utils/resize";
 import { GrView } from "react-icons/gr";
+import PageJump from "@/components/ui/pageJump";
 
 export default function IndexPage() {
   const [filter, setFilter] = useState<string[]>([]);
@@ -31,13 +32,13 @@ export default function IndexPage() {
   return (
     <DefaultLayout>
       <Resize setScreen={setScreen} />
-      <section className="flex flex-col items-center gap-2 sm:gap-4 pb-12">
-        <div className="flex w-full gap-2 bg-default/70 rounded-[3px] p-3 items-center justify-between">
+      <section className="flex flex-col items-center gap-2 sm:gap-4">
+        <div className="flex w-full gap-2 dark:bg-default/60 bg-gray-300/90 rounded-[3px] p-3 items-center justify-between">
           <ThemeSwitch />
           <p className="text-warning">{apiLength} vehicles registered</p>
         </div>
         <div className="h-full w-full flex lg:flex-row flex-col gap-2 sm:gap-4">
-          <div className="relative sticky top-2 -mx-4 lg:m-0 px-4 z-50 dark:bg-black/60 bg-gray-100/80 lg:p-0 py-2 backdrop-blur-md lg:w-fit w-[100dvw] items-center h-fit ">
+          <div className="relative sticky top-5 -mx-4 lg:m-0 px-4 z-50 dark:bg-default/0 bg-gray-300/90 lg:p-0 py-2 backdrop-blur-md lg:w-fit w-[100dvw] items-center h-fit ">
             {screen.includes("small") && < div className="flex gap-1 items-center">
               <Button color="warning" radius="none" className="rounded-sm flex-1" onPress={() => setFiltering(!isOpenFiltering)} >Set filters</Button>
               <PostComponent setPage={setPage} />
@@ -48,16 +49,19 @@ export default function IndexPage() {
                 <MdDelete size={20} />
               </Button>
             </div>}
-            <div className={`xl:w-[300px] lg:w-[200px w-[100%] lg:flex absolute flex-col gap-4 lg:bg-default/70 bg-transparent rounded-sm lg:p-3 lg:sticky h-fit top-10 
+            <div className={`xl:w-[300px] lg:w-[200px w-[100%] lg:flex absolute flex-col gap-4 lg:dark:bg-default/60 lg:bg-gray-300/90 bg-transparent rounded-sm lg:p-3 lg:sticky h-fit top-10 
               ${isOpenFiltering ? "block" : "lg:block hidden"} -mx-4 lg:m-0 px-4 py-3 `}>
               <SearchComponent setFilter={setFilter} />
               {!screen.includes("small") && <PostComponent setPage={setPage} />}
             </div>
           </div>
-          <div className="flex-1 justify-items-center">
+          <div className="flex-1 w-full justify-items-center">
             <VehiclesList setApiLength={setApiLength} setPage={setPage} vehicles={vehicles} loading={loading} message={message} apiPages={apiPages} mbDelete={mbDelete} screen={screen} mbView={mbView} />
             {!message && <PageNavigation apiPages={apiPages} setPage={setPage} page={page} />}
           </div>
+          {!screen.includes("small") && <div className="w-10">
+            <PageJump />
+          </div>}
         </div>
       </section>
     </DefaultLayout >

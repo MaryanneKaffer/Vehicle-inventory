@@ -2,7 +2,17 @@
 @plugin '../hero.ts';
 
 @source '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+    background-color: white;
+}
+
+.dark {
+    --heroui-default: 222 25% 22%;
+    background-color: #11151e;
+    color: white;
+}
 
 p,
 h1,
@@ -12,7 +22,6 @@ h2 {
 }
 
 @layer utilities {
-
     input[type="number"]::-webkit-outer-spin-button,
     input[type="number"]::-webkit-inner-spin-button {
         -webkit-appearance: none;
@@ -22,4 +31,8 @@ h2 {
     input[type="number"] {
         -moz-appearance: textfield;
     }
+}
+
+html {
+    scroll-behavior: smooth;
 }

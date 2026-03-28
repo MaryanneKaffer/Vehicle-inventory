@@ -19,7 +19,7 @@ export const GetVehicles = async ({ filter, page, setMessage, setLoading, setVeh
     setLoading(true);
 
     try {
-        const response = await fetch(`${API_URL}/vehicles/get?${filter}&page=${page - 1}&size=20`);
+        const response = await fetch(`${API_URL}/vehicles/get?${filter}&page=${page - 1}&size=20`, { priority: 'high' });
 
         if (!response.ok) {
             throw new Error(`Server error: ${response.status}`);
