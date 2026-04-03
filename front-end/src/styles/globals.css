@@ -10,6 +10,7 @@
 
 .dark {
     --heroui-default: 222 25% 22%;
+    --heroui-secondary: 222 28% 10%;
     background-color: #11151e;
     color: white;
 }
@@ -22,6 +23,7 @@ h2 {
 }
 
 @layer utilities {
+
     input[type="number"]::-webkit-outer-spin-button,
     input[type="number"]::-webkit-inner-spin-button {
         -webkit-appearance: none;

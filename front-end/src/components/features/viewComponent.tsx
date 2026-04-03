@@ -20,7 +20,7 @@ export default function ViewComponent({ id, mbView }: { id: number, mbView: bool
                 <GrView size={18} />
             </Button>
             {vehicle &&
-                <Modal isOpen={isOpen} onOpenChange={onOpenChange} radius="none" className="rounded-sm" backdrop="blur" size="3xl" classNames={{ body: "sm:px-8 w-full" }}>
+                <Modal isOpen={isOpen} onOpenChange={onOpenChange} radius="none" className="rounded-sm bg-secondary" backdrop="blur" size="3xl" classNames={{ body: "sm:px-8 w-full" }}>
                     <ModalContent className="items-center flex-1">
                         <ModalBody className="flex-1 gap-4 h-full">
                             <form className="flex md:flex-row flex-col gap-4 h-full mt-4">

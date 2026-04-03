@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,10 +22,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.Transformation;
 import com.cloudinary.utils.ObjectUtils;
+import com.maryannekaffer.vehicle_inventory.entity.User;
 import com.maryannekaffer.vehicle_inventory.entity.Vehicle;
 import com.maryannekaffer.vehicle_inventory.repository.VehicleRepository;
 
-@CrossOrigin(origins = "https://vehicle-inventory.vercel.app")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/vehicles")
 public class VehicleController {
@@ -65,7 +67,12 @@ public class VehicleController {
             @RequestParam int manufactureYear,
             @RequestParam(required = false) MultipartFile image) throws IOException {
 
+        var auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) auth.getPrincipal();
+
         Vehicle vehicle = new Vehicle();
+        vehicle.setOwner(user);
+
         vehicle.setName(name);
         vehicle.setDescription(description);
         vehicle.setBrand(brand);
@@ -81,19 +88,27 @@ public class VehicleController {
                                     .height(250)
                                     .crop("fill")
                                     .quality("auto")
-                                    .fetchFormat("avif")
-                    ));
+                                    .fetchFormat("avif")));
             String imageUrl = uploadResult.get("secure_url").toString();
             vehicle.setImage(imageUrl);
         }
+
         return repository.save(vehicle);
     }
 
     @DeleteMapping("/delete/{id}")
     @CacheEvict(value = "vehicles", allEntries = true)
     public Vehicle delete(@PathVariable Long id) throws IOException {
+        var auth = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = (User) auth.getPrincipal();
+
         Vehicle vehicle = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Vehicle not found"));
+
+        if (!vehicle.getOwner().getEmail().equals(currentUser.getEmail())) {
+            throw new org.springframework.security.access.AccessDeniedException(
+                    "You dont have permission to delete other users posts");
+        }
 
         if (id > 31 && vehicle.getImage() != null && !vehicle.getImage().isEmpty()) {
             try {

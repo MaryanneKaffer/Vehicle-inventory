@@ -1,5 +1,12 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
+export interface User {
+    id?: number;
+    username: string;
+    email: string;
+    picture?: string;
+}
+
 export interface Vehicle {
     id: number;
     brand: string;
@@ -9,7 +16,13 @@ export interface Vehicle {
     manufactureYear: number;
     price: number;
     image: string;
+    owner: User;
 }
+
+const getAuthHeaders = () => (
+    {
+        "Authorization": `Bearer ${localStorage.getItem('token')}`
+    });
 
 export const GetVehicles = async ({ filter, page, setMessage, setLoading, setVehicles, setApiLength, setApiPages }: {
     filter: string, page: number, setMessage: (message: string) => void, setLoading: (loading: boolean) => void, setVehicles: (vehicles: Vehicle[]) => void,
@@ -24,27 +37,17 @@ export const GetVehicles = async ({ filter, page, setMessage, setLoading, setVeh
         if (!response.ok) {
             throw new Error(`Server error: ${response.status}`);
         }
-
         const data = await response.json();
 
-        const content = data?.content || [];
-        const totalElements = data?.totalElements || 0;
-        const totalPages = data?.totalPages || 0;
+        setVehicles(data?.content || [])
+        setApiLength(data?.totalElements || 0);
+        setApiPages(data?.totalPages || 0);
 
-        setVehicles(content);
-        setApiLength(totalElements);
-        setApiPages(totalPages);
-
-        if (content.length === 0) {
+        if (data?.content.length === 0) {
             setMessage("No vehicles found.");
         }
-
     } catch (error) {
-        console.error("Error fetching vehicles:", error);
         setMessage("Error fetching vehicles.");
-        setVehicles([]);
-        setApiLength(0);
-        setApiPages(0);
     } finally {
         setLoading(false);
     }
@@ -55,8 +58,8 @@ export async function GetVehicleById(id: number, setVehicle: (vehicle: Vehicle) 
         const response = await fetch(`${API_URL}/vehicles/${id}`);
         const data = await response.json();
         setVehicle(data)
-    } catch (error) {
-        console.error("Error fetching vehicles:", error);
+    } catch (error: any) {
+        throw new Error(error.message || "Unknown error");
     }
 }
 
@@ -65,22 +68,26 @@ export const PostVehicle = async (data: FormData) => {
         const response = await fetch(`${API_URL}/vehicles/create`,
             {
                 method: "POST",
-                body: data
+                headers: getAuthHeaders(),
+                body: data,
             });
         return response.json();
-    } catch (error) {
-        console.error("Error posting vehicle:", error);
+    } catch (error: any) {
+        throw new Error(error.message || "Unknown error");
     }
 };
 
 export const DeleteVehicle = async (id: number) => {
-    try {
-        const response = await fetch(`${API_URL}/vehicles/delete/${id}`,
-            {
-                method: "DELETE"
-            });
-        return response.json();
-    } catch (error) {
-        console.error("Error deleting vehicle:", error);
+    const response = await fetch(`${API_URL}/vehicles/delete/${id}`,
+        {
+            method: "DELETE",
+            headers: getAuthHeaders()
+        });
+
+    if (!response.ok) {
+        const errorData = await response.json().catch(() => null);
+        throw new Error(errorData.message || "Unknown error");
     }
+
+    return response.json();
 };

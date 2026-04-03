@@ -7,7 +7,7 @@ import { Input } from "@heroui/input";
 import { useEffect, useRef, useState } from "react";
 import { convertToVehicleFormData } from "../utils/convertToVehicle";
 
-export default function PostComponent({ setPage }: { setPage: (pages: number) => void }) {
+export default function PostComponent({ setPage, screen }: { setPage: (pages: number) => void, screen?: string }) {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const { control, handleSubmit, reset, register } = useForm();
     const fileRef = useRef<HTMLInputElement | null>(null);
@@ -37,14 +37,14 @@ export default function PostComponent({ setPage }: { setPage: (pages: number) =>
 
     return (
         <div >
-            <Button variant="ghost" color="warning" className="w-full rounded-sm" radius="none" onPress={onOpen} > Register a Vehicle </Button>
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange} radius="none" className="rounded-sm" backdrop="blur" size="2xl">
+            <Button variant="ghost" color="warning" className="w-full rounded-sm" radius="none" onPress={onOpen} > {screen ? "Register vehicle" : "Register a Vehicle"}  </Button>
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange} radius="none" className="rounded-sm bg-secondary" backdrop="blur" size="2xl">
                 <ModalContent className="items-center flex-1">
                     <ModalHeader className="flex flex-col gap-1 text-center cursor-default text-warning">Register a Vehicle</ModalHeader>
                     <ModalBody>
                         <form onSubmit={handleSubmit(onSubmit)} className="flex md:flex-row flex-col gap-4">
                             <div className="flex flex-col gap-4">
-                                <ControllerInput fieldName={fields[0].name} fieldType={fields[0].type} control={control} register={register} />
+                                <ControllerInput fieldName={fields[0].name} fieldType={fields[0].type} control={control} register={register} rules={{ required: "Username is required", }} />
                                 <Input type={fields[6].type} className="hidden absolute" {...rest} radius="none"
                                     ref={(e: any) => { ref(e); fileRef.current = e; }}
                                     onChange={(e) => {
@@ -72,7 +72,7 @@ export default function PostComponent({ setPage }: { setPage: (pages: number) =>
                             <div className="flex flex-col gap-4">
                                 <div className="grid grid-cols-2 gap-4">
                                     {fields.slice(1, 5).map((field) => (
-                                        <ControllerInput key={field.name} fieldName={field.name} fieldType={field.type} control={control} register={register} />
+                                        <ControllerInput key={field.name} fieldName={field.name} fieldType={field.type} control={control} register={register} rules={{ required: "Required" }} />
                                     ))}
                                 </div>
                                 <ControllerInput fieldName={fields[5].name} fieldType={fields[5].type} control={control} register={register} />
