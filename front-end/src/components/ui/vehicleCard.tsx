@@ -24,7 +24,7 @@ export default function VehicleCard({ vehicle, mbView, mbDelete, setPage, i }: {
             <p className="text-warning md:text-base text-sm">{vehicle.manufactureYear}</p>
             <p className="md:text-base text-sm">${vehicle.price?.toFixed(2)}</p>
 
-            {vehicle.owner ? <div className="mt-2 flex gap-1 items-center">
+            <div className="mt-2 flex gap-1 items-center">
                 {vehicle.owner.picture ?
                     <img src={vehicle.owner.picture} className="rounded-full dark:bg-black/20 bg-white size-[28px]" />
                     :
@@ -33,12 +33,6 @@ export default function VehicleCard({ vehicle, mbView, mbDelete, setPage, i }: {
                     </span>}
                 <p className="text-gray-300">{vehicle.owner.username}</p>
             </div>
-                :
-                <div className="mt-2 flex gap-1 items-center">
-                    <span className="rounded-full dark:bg-black/20 bg-white size-[28px] flex items-center justify-center"><FaCog size={18} /></span>
-                    <p className="text-gray-300">auto</p>
-                </div>
-            }
 
             <footer className="absolute md:bottom-3 md:right-3 bottom-2 right-2 flex gap-1 items-center lg:opacity-0 group-hover:opacity-100 transition-opacity">
                 <ViewComponent id={vehicle.id} mbView={mbView} />

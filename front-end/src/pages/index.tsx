@@ -1,8 +1,8 @@
+import { useEffect, useState } from "react";
 import DefaultLayout from "@/layouts/default";
 import SearchComponent from "@/components/ui/searchComponent";
 import { ThemeSwitch } from "@/components/features/theme-switch";
 import VehiclesList from "@/components/features/vehiclesList";
-import { useEffect, useState } from "react";
 import PostComponent from "@/components/features/postVehicleComponent";
 import { GetVehicles, Vehicle } from "@/api/vehicles";
 import PageNavigation from "@/components/ui/pagination";
@@ -28,13 +28,15 @@ export default function IndexPage() {
   const [isOpenFiltering, setFiltering] = useState(false)
 
   const fetchData = (targetPage: number) => {
-    const filterQuery = filter.filter(Boolean).join("&");
-    GetVehicles({ filter: filterQuery, page: targetPage, setMessage, setLoading, setVehicles, setApiLength, setApiPages });
+    GetVehicles({ filter: filter.filter(Boolean).join("&"), page: targetPage, setMessage, setLoading, setVehicles, setApiLength, setApiPages });
   };
 
   useEffect(() => {
-    setPage(1);
-    fetchData(1);
+    if (page !== 1) {
+      setPage(1);
+    } else {
+      fetchData(1);
+    }
   }, [filter]);
 
   useEffect(() => {

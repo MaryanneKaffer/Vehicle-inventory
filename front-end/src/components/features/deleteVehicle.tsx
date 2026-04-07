@@ -1,6 +1,6 @@
 import { DeleteVehicle } from "@/api/vehicles";
 import { Button } from "@heroui/button";
-import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from "@heroui/react";
+import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Tooltip, useDisclosure } from "@heroui/react";
 import { useState } from "react";
 import { MdDelete } from "react-icons/md";
 
@@ -21,10 +21,12 @@ export default function DeleteComponent({ name, id, setPage, mbDelete, logged }:
 
     return (
         <>
-            <Button isDisabled={logged ? false : true} variant={logged ? "ghost" : "flat"} size="sm" color="danger" radius="none" onPress={onOpen} aria-label="delete vehicle"
-                className={`w-[40px] min-w-0 p-0 h-[35px] rounded-sm group-hover:opacity-100 ${!mbDelete && "opacity-0 -z-100 lg:z-10"} transition-opacity`}>
-                <MdDelete size={20} />
-            </Button>
+            <Tooltip delay={0} content={!logged ? "Login first"}>
+                <Button variant={logged ? "ghost" : "flat"} size="sm" color={logged ? "danger" : undefined} radius="none" onPress={logged && onOpen} aria-label="delete vehicle"
+                    className={`w-[40px] min-w-0 p-0 h-[35px] rounded-sm group-hover:opacity-100 ${!mbDelete && "opacity-0 -z-100 lg:z-10"} ${!logged && "bg-gray-700"} transition-opacity`}>
+                    <MdDelete size={20} />
+                </Button>
+            </Tooltip>
 
             <Modal isOpen={isOpen} onOpenChange={onOpenChange} radius="none" className="rounded-sm bg-secondary" backdrop="blur">
                 <ModalContent className="items-center flex-1">

@@ -9,16 +9,17 @@ export interface Vehicle {
 }
 
 export const PostUser = async (data: FormData) => {
-    try {
-        const response = await fetch(`${API_URL}/users/create`,
-            {
-                method: "POST",
-                body: data
-            });
-        return response.json();
-    } catch (error) {
-        console.error("Error registering user:", error);
+    const response = await fetch(`${API_URL}/users/create`,
+        {
+            method: "POST",
+            body: data
+        });
+    if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || "Register failed");
     }
+
+    return await response.json();
 };
 
 export const LoginUser = async (data: { email: string; password: string }) => {
@@ -51,9 +52,8 @@ export const getLoggedUser = async () => {
     });
 
     if (response.ok) {
-        const data = await response.json(); 
-        console.log("Dados do usuário vindos do servidor:", data);
-        return data; 
+        const data = await response.json();
+        return data;
     }
     return null;
 };
