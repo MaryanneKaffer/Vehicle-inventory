@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import DefaultLayout from "@/layouts/default";
 import SearchComponent from "@/components/ui/searchComponent";
 import { ThemeSwitch } from "@/components/features/theme-switch";
@@ -13,6 +13,7 @@ import { GrView } from "react-icons/gr";
 import PageJump from "@/components/ui/pageJump";
 import { FaCar } from "react-icons/fa";
 import LoginInfo from "@/components/ui/loginInfo";
+import { AuthContext } from "@/context/authContext";
 
 export default function IndexPage() {
   const [filter, setFilter] = useState<string[]>([]);
@@ -26,6 +27,7 @@ export default function IndexPage() {
   const [mbView, setMbView] = useState(false);
   const [screen, setScreen] = useState("");
   const [isOpenFiltering, setFiltering] = useState(false)
+  const { user } = useContext(AuthContext);
 
   const fetchData = (targetPage: number) => {
     GetVehicles({ filter: filter.filter(Boolean).join("&"), page: targetPage, setMessage, setLoading, setVehicles, setApiLength, setApiPages });
@@ -66,11 +68,12 @@ export default function IndexPage() {
             <div className={`xl:w-[300px] lg:w-[200px w-[100%] lg:flex absolute flex-col gap-4 lg:dark:bg-default/60 lg:bg-gray-300/90 bg-transparent rounded-sm lg:p-3 lg:sticky h-fit top-10 
               ${isOpenFiltering ? "block" : "lg:block hidden"} -mx-4 lg:m-0 px-4 py-3 `}>
               <SearchComponent setFilter={setFilter} />
-              {!screen.includes("small") && <PostComponent setPage={setPage} />}
+              {!screen.includes("small") && <PostComponent setPage={setPage} logged={user || undefined} />}
             </div>
           </div>
           <div className="flex-1 w-full justify-items-center">
-            <VehiclesList setApiLength={setApiLength} setPage={setPage} vehicles={vehicles} loading={loading} message={message} apiPages={apiPages} mbDelete={mbDelete} screen={screen} mbView={mbView} />
+            <VehiclesList setApiLength={setApiLength} setPage={setPage} vehicles={vehicles} loading={loading} message={message} apiPages={apiPages} mbDelete={mbDelete} screen={screen}
+              mbView={mbView} logged={user} />
             {!message && <PageNavigation apiPages={apiPages} setPage={setPage} page={page} />}
           </div>
           {!screen.includes("small") && <div className="w-10">

@@ -44,7 +44,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         localStorage.removeItem('token');
         setUser(null);
     };
-console.log("Usuário atual no contexto:", user);
+
     return (
         <AuthContext.Provider value={{ authenticated: !!user, user, login, logout }}>
             {children}

@@ -2,12 +2,13 @@ import { Button } from "@heroui/button";
 import { Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@heroui/modal";
 import ControllerInput from "../ui/controllerInput";
 import { useForm } from "react-hook-form";
-import { PostVehicle } from "@/api/vehicles";
+import { PostVehicle, User } from "@/api/vehicles";
 import { Input } from "@heroui/input";
 import { useEffect, useRef, useState } from "react";
 import { convertToVehicleFormData } from "../utils/convertToVehicle";
+import { Tooltip } from "@heroui/tooltip";
 
-export default function PostComponent({ setPage, screen }: { setPage: (pages: number) => void, screen?: string }) {
+export default function PostComponent({ setPage, screen, logged }: { setPage: (pages: number) => void, screen?: string, logged?: User }) {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const { control, handleSubmit, reset, register } = useForm();
     const fileRef = useRef<HTMLInputElement | null>(null);
@@ -31,13 +32,21 @@ export default function PostComponent({ setPage, screen }: { setPage: (pages: nu
         }
     }
 
+    function handleOpen() {
+        if (logged) {
+            onOpen();
+        }
+    }
+
     useEffect(() => {
         if (!isOpen) { reset(); }
     }, [isOpen, reset]);
 
     return (
         <div >
-            <Button variant="ghost" color="warning" className="w-full rounded-sm" radius="none" onPress={onOpen} > {screen ? "Register vehicle" : "Register a Vehicle"}  </Button>
+            <Tooltip delay={200} content={!logged && "Login first to register vehicles"} className={`${logged && "hidden"}`} placement="bottom">
+                <Button variant={logged ? "ghost" : "flat"} color={logged ? "warning" : undefined} className={`w-full rounded-sm dark:bg-default/60 bg-white ${!logged && "cursor-default"}`} radius="none" onPress={handleOpen} > {screen ? "Register vehicle" : "Register a Vehicle"}  </Button>
+            </Tooltip>
             <Modal isOpen={isOpen} onOpenChange={onOpenChange} radius="none" className="rounded-sm bg-secondary" backdrop="blur" size="2xl">
                 <ModalContent className="items-center flex-1">
                     <ModalHeader className="flex flex-col gap-1 text-center cursor-default text-warning">Register a Vehicle</ModalHeader>

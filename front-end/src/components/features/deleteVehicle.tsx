@@ -4,7 +4,7 @@ import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Tooltip, useD
 import { useState } from "react";
 import { MdDelete } from "react-icons/md";
 
-export default function DeleteComponent({ name, id, setPage, mbDelete, logged }: { name: string, id: number, setPage: (page: number) => void, mbDelete: boolean, logged: string }) {
+export default function DeleteComponent({ name, id, setPage, mbDelete, logged }: { name: string, id: number, setPage: (page: number) => void, mbDelete: boolean, logged: any }) {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const [error, setError] = useState("")
 
@@ -19,11 +19,17 @@ export default function DeleteComponent({ name, id, setPage, mbDelete, logged }:
         }
     }
 
+    function handleOpen() {
+        if (logged) {
+            onOpen();
+        }
+    }
+
     return (
         <>
-            <Tooltip delay={0} content={!logged ? "Login first"}>
-                <Button variant={logged ? "ghost" : "flat"} size="sm" color={logged ? "danger" : undefined} radius="none" onPress={logged && onOpen} aria-label="delete vehicle"
-                    className={`w-[40px] min-w-0 p-0 h-[35px] rounded-sm group-hover:opacity-100 ${!mbDelete && "opacity-0 -z-100 lg:z-10"} ${!logged && "bg-gray-700"} transition-opacity`}>
+            <Tooltip delay={200} content={!logged && "Login first"} className={`${logged && "hidden"}`} placement="bottom">
+                <Button variant={logged ? "ghost" : "flat"} size="sm" color={logged ? "danger" : undefined} radius="none" onPress={handleOpen} aria-label="delete vehicle"
+                    className={`w-[40px] min-w-0 p-0 h-[35px] rounded-sm group-hover:opacity-100 ${!mbDelete && "opacity-0 -z-100 lg:z-10"} ${!logged && "bg-gray-700 cursor-default"} transition-opacity`}>
                     <MdDelete size={20} />
                 </Button>
             </Tooltip>

@@ -5,9 +5,8 @@ import ViewComponent from "../features/viewComponent";
 import { Vehicle } from "@/api/vehicles";
 import { FaCog } from "react-icons/fa";
 
-export default function VehicleCard({ vehicle, mbView, mbDelete, setPage, i }: { vehicle: Vehicle, mbDelete: boolean, mbView: boolean, setPage: (page: number) => void, i: number }) {
-    const logged = localStorage.getItem('token');
-
+export default function VehicleCard({ vehicle, mbView, mbDelete, setPage, i, logged }: 
+    { vehicle: Vehicle, mbDelete: boolean, mbView: boolean, setPage: (page: number) => void, i: number, logged: any }) {
     return (
         <motion.article initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             key={vehicle.id} className="group flex flex-col bg-default/70 rounded-[3px] sm:p-3 p-2 transition-all hover:scale-[1.01] relative">
