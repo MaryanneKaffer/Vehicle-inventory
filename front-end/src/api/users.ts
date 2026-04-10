@@ -1,11 +1,10 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
-export interface Vehicle {
-    id: number;
+export interface User {
+    id?: number;
     username: string;
     email: string;
-    password: string;
-    picture: string;
+    picture?: string;
 }
 
 export const PostUser = async (data: FormData) => {

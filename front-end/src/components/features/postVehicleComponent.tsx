@@ -2,11 +2,12 @@ import { Button } from "@heroui/button";
 import { Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@heroui/modal";
 import ControllerInput from "../ui/controllerInput";
 import { useForm } from "react-hook-form";
-import { PostVehicle, User } from "@/api/vehicles";
+import { PostVehicle } from "@/api/vehicles";
 import { Input } from "@heroui/input";
 import { useEffect, useRef, useState } from "react";
 import { convertToVehicleFormData } from "../utils/convertToVehicle";
 import { Tooltip } from "@heroui/tooltip";
+import { User } from "@/api/users";
 
 export default function PostComponent({ setPage, screen, logged }: { setPage: (pages: number) => void, screen?: string, logged?: User }) {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();

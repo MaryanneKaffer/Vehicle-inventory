@@ -24,7 +24,7 @@ export default function LoginInfo() {
                 {authenticated ? <>
                     {user?.picture ? <img src={user.picture} className="rounded-full dark:bg-black/20 bg-white h-[30px] object-cover" />
                         : <span className="rounded-full dark:bg-black/20 bg-white p-1"><IoPersonSharp size={20} /></span>}
-                    <p className="cursor-pointer">{user?.username}</p>
+                    <p>{user?.username}</p>
                 </> :
                     <>
                         <span className="rounded-full dark:bg-black/20 bg-white p-1"><IoPersonSharp size={20} /></span>

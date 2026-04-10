@@ -27,7 +27,7 @@ export default function ViewComponent({ id, mbView }: { id: number, mbView: bool
                                 <div className="h-[200px] relative md:w-[350px] group border-2 border-warning flex items-center justify-center cursor-pointer overflow-hidden rounded-sm" >
                                     {vehicle.image && <img src={vehicle.image} alt={vehicle.name} className="aspect-video transition-all object-cover w-full h-[100%]" />}
                                     <span className={`text-warning absolute ${vehicle.image && "opacity-0 group-hover:opacity-100 transition-all"} h-full w-full bg-black/70 backdrop-blur-sm`}>
-                                        <a href={vehicle.image} target="_blank" className="flex justify-center h-full items-center"> {vehicle.image.split('/').pop() || "No image"} </a>
+                                        <a href={vehicle.image} target="_blank" className="flex justify-center h-full items-center"> {vehicle.image ? vehicle.image.split('/').pop() : "No image"} </a>
                                     </span>
                                 </div>
                                 <div className="flex flex-col gap-2 md:w-[400px]">
