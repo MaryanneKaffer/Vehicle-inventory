@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.Transformation;
 import com.cloudinary.utils.ObjectUtils;
-import com.maryannekaffer.vehicle_inventory.dto.UserSummaryDTO;
+import com.maryannekaffer.vehicle_inventory.dto.UserDTO;
 import com.maryannekaffer.vehicle_inventory.dto.VehicleDTO;
 import com.maryannekaffer.vehicle_inventory.entity.User;
 import com.maryannekaffer.vehicle_inventory.entity.Vehicle;
@@ -44,14 +44,15 @@ public class VehicleService {
     public Page<VehicleDTO> findAll(String name, String brand, String model, Integer year, BigDecimal price,
             Pageable pageable) {
         return repository.findByFilters(name, brand, model, year, price, pageable)
-                .map(this::mapToDTO); 
+                .map(this::mapToDTO);
     }
 
     private VehicleDTO mapToDTO(Vehicle vehicle) {
-        UserSummaryDTO ownerDTO = new UserSummaryDTO(
+        UserDTO ownerDTO = new UserDTO(
                 vehicle.getOwner().getId(),
                 vehicle.getOwner().getUsername(),
-                vehicle.getOwner().getEmail());
+                vehicle.getOwner().getEmail(),
+                vehicle.getOwner().getPicture());
 
         return new VehicleDTO(
                 vehicle.getId(),

@@ -49,41 +49,33 @@ export const GetVehicles = async ({ filter, page, setMessage, setLoading, setVeh
 export async function GetVehicleById(id: number, setVehicle: (vehicle: Vehicle) => void) {
     const response = await fetch(`${API_URL}/vehicles/${id}`);
     const data = await response.json();
-    setVehicle(data)
 
     if (!response.ok) {
-        const errorData = await response.json().catch(() => null);
-        throw new Error(errorData.message || "Unknown error");
+        throw new Error(data?.message || "Unknown error");
     }
+    return setVehicle(data);
 }
 
 export const PostVehicle = async (data: FormData) => {
-    const response = await fetch(`${API_URL}/vehicles/create`,
-        {
-            method: "POST",
-            headers: getAuthHeaders(),
-            body: data,
-        });
-
+    const response = await fetch(`${API_URL}/vehicles/create`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: data,
+    });
     if (!response.ok) {
-        const errorData = await response.json().catch(() => null);
+        const errorData = await response.json().catch(() => ({}));
         throw new Error(errorData.message || "Unknown error");
     }
-
     return response.json();
 };
 
 export const DeleteVehicle = async (id: number) => {
-    const response = await fetch(`${API_URL}/vehicles/delete/${id}`,
-        {
-            method: "DELETE",
-            headers: getAuthHeaders()
-        });
-
+    const response = await fetch(`${API_URL}/vehicles/delete/${id}`, {
+        method: "DELETE",
+        headers: getAuthHeaders(),
+    });
     if (!response.ok) {
-        const errorData = await response.json().catch(() => null);
+        const errorData = await response.json().catch(() => ({}));
         throw new Error(errorData.message || "Unknown error");
     }
-
-    return response.json();
 };

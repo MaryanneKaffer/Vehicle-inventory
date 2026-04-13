@@ -1,4 +1,4 @@
-import { getLoggedUser } from '@/api/users';
+import { GetLoggedUser } from '@/api/users';
 import { createContext, useState, useEffect, ReactNode } from 'react';
 
 interface User {
@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         async function loadStorageData() {
             const token = localStorage.getItem('token');
             if (token) {
-                const data = await getLoggedUser();
+                const data = await GetLoggedUser();
                 if (data) {
                     setUser(data);
                 } else {

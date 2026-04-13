@@ -11,5 +11,5 @@ public record VehicleDTO(
     Integer manufactureYear,
     BigDecimal price,
     String image,
-    UserSummaryDTO owner
+    UserDTO owner
 ) {}

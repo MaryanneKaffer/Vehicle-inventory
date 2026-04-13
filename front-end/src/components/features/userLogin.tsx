@@ -2,7 +2,7 @@ import { Button } from "@heroui/button";
 import ControllerInput from "../ui/controllerInput";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { getLoggedUser, LoginUser } from "@/api/users";
+import { GetLoggedUser, LoginUser } from "@/api/users";
 import { AuthContext } from "@/context/authContext";
 
 export default function UserLogin({ setLogin }: { setLogin: (value: boolean) => void }) {
@@ -16,7 +16,7 @@ export default function UserLogin({ setLogin }: { setLogin: (value: boolean) => 
         try {
             const response = await LoginUser(data);
             localStorage.setItem("token", response.token);
-            const userData = await getLoggedUser();
+            const userData = await GetLoggedUser();
 
             if (userData) {
                 login(userData, response.token);

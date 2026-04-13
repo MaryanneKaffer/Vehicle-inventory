@@ -1,4 +1,4 @@
-package com.maryannekaffer.vehicle_inventory.service;
+package com.maryannekaffer.vehicle_inventory.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

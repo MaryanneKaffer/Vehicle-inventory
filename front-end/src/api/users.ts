@@ -7,6 +7,10 @@ export interface User {
     picture?: string;
 }
 
+const getAuthHeaders = () => ({
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
+});
+
 export const PostUser = async (data: FormData) => {
     const response = await fetch(`${API_URL}/users/create`,
         {
@@ -38,21 +42,13 @@ export const LoginUser = async (data: { email: string; password: string }) => {
     return await response.json();
 };
 
-export const getLoggedUser = async () => {
-    const token = localStorage.getItem('token');
+export const GetLoggedUser = async (): Promise<User | null> => {
+    const token = localStorage.getItem("token");
     if (!token) return null;
 
     const response = await fetch(`${API_URL}/users/me`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        }
+        headers: getAuthHeaders(),
     });
-
-    if (response.ok) {
-        const data = await response.json();
-        return data;
-    }
-    return null;
+    if (!response.ok) return null;
+    return response.json();
 };
