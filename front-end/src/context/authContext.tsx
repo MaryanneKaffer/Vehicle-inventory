@@ -1,11 +1,5 @@
-import { GetLoggedUser } from '@/api/users';
+import { GetLoggedUser, User } from '@/api/users';
 import { createContext, useState, useEffect, ReactNode } from 'react';
-
-interface User {
-    username: string;
-    email: string;
-    picture?: string;
-}
 
 interface AuthContextData {
     authenticated: boolean;

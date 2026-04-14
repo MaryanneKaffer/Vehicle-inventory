@@ -72,7 +72,7 @@ export default function IndexPage() {
             </div>
           </div>
           <div className="flex-1 w-full justify-items-center">
-            <VehiclesList setApiLength={setApiLength} setPage={setPage} vehicles={vehicles} loading={loading} message={message} apiPages={apiPages} mbDelete={mbDelete} screen={screen}
+            <VehiclesList setPage={setPage} vehicles={vehicles} loading={loading} message={message} apiPages={apiPages} mbDelete={mbDelete} screen={screen}
               mbView={mbView} logged={user} />
             {!message && <PageNavigation apiPages={apiPages} setPage={setPage} page={page} />}
           </div>

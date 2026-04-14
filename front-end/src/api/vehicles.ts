@@ -56,17 +56,34 @@ export async function GetVehicleById(id: number, setVehicle: (vehicle: Vehicle) 
     return setVehicle(data);
 }
 
-export const PostVehicle = async (data: FormData) => {
-    const response = await fetch(`${API_URL}/vehicles/create`, {
+export const PostVehicle = async (data: FormData, userId: number) => {
+    const response = await fetch(`${API_URL}/vehicles/get?page=0&size=100`, {
+        headers: getAuthHeaders(),
+    });
+
+    if (response.ok) {
+        const result = await response.json();
+        const userVehicles = (result?.content || []).filter(
+            (v: Vehicle) => v.owner?.id === userId
+        );
+
+        if (userVehicles.length >= 3) {
+            throw new Error("You already have 3 vehicles registered. Delete one before adding a new one.");
+        }
+    }
+
+    const createResponse = await fetch(`${API_URL}/vehicles/create`, {
         method: "POST",
         headers: getAuthHeaders(),
         body: data,
     });
-    if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
+
+    if (!createResponse.ok) {
+        const errorData = await createResponse.json().catch(() => ({}));
         throw new Error(errorData.message || "Unknown error");
     }
-    return response.json();
+
+    return createResponse.json();
 };
 
 export const DeleteVehicle = async (id: number) => {

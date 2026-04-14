@@ -106,6 +106,7 @@ public class VehicleService {
     private String uploadImage(MultipartFile image) throws IOException {
         Map<?, ?> uploadResult = cloudinary.uploader().upload(image.getBytes(),
                 ObjectUtils.asMap(
+                        "folder", "vehicles",
                         "transformation", new Transformation<>()
                                 .width(350).height(200).crop("fill")
                                 .quality("auto").fetchFormat("avif")));

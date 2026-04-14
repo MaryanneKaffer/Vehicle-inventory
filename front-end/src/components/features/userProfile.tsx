@@ -11,8 +11,8 @@ export default function UserProfile({ user }: { user: any }) {
             </div>
             <div className="flex flex-col ">
                 <h2 className="text-gray-300">Permissions</h2>
-                <p><span className="text-warning">  Register: </span> only 3 at once </p>
-                <p><span className="text-warning">  Delete: </span> only own posts </p>
+                <p><span className="text-warning">  Register: </span> Up to 3 vehicles at once </p>
+                <p><span className="text-warning">  Delete: </span> Only own vehicles </p>
             </div>
         </div>
     )
