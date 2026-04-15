@@ -38,3 +38,5 @@ build/
 .env.test.local
 .env.production.local
 .env*.local
+
+./src/main/resources/applicationtest
