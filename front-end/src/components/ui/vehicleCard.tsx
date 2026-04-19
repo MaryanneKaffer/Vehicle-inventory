@@ -4,8 +4,12 @@ import DeleteComponent from "../features/deleteVehicle";
 import ViewComponent from "../features/viewComponent";
 import { Vehicle } from "@/api/vehicles";
 import { FaCog } from "react-icons/fa";
+import { Button } from "@heroui/button";
+import { Popover, PopoverContent, PopoverTrigger } from "@heroui/popover";
+import { SlOptions } from "react-icons/sl";
+import { MdEdit } from "react-icons/md";
 
-export default function VehicleCard({ vehicle, mbView, mbDelete, setPage, i, logged }: 
+export default function VehicleCard({ vehicle, mbView, mbDelete, setPage, i, logged }:
     { vehicle: Vehicle, mbDelete: boolean, mbView: boolean, setPage: (page: number) => void, i: number, logged: any }) {
     return (
         <motion.article initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
@@ -34,8 +38,17 @@ export default function VehicleCard({ vehicle, mbView, mbDelete, setPage, i, log
             </div>
 
             <footer className="absolute md:bottom-3 md:right-3 bottom-2 right-2 flex gap-1 items-center lg:opacity-0 group-hover:opacity-100 transition-opacity">
-                <ViewComponent id={vehicle.id} mbView={mbView} />
-                <DeleteComponent name={vehicle.name} id={vehicle.id} setPage={setPage} mbDelete={mbDelete} logged={logged || ""} />
+                <Popover placement="bottom">
+                    <PopoverTrigger>
+                        <Button className="min-w-0 bg-transparent py-0"><SlOptions size={20} color="warning" /></Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="max-w-64 flex flex-row gap-1 items-center rounded-sm bg-secondary p-2">
+                        <ViewComponent id={vehicle.id} mbView={mbView} />
+                        <DeleteComponent name={vehicle.name} id={vehicle.id} setPage={setPage} mbDelete={mbDelete} logged={logged || ""} />
+                        <Button variant={logged ? "ghost" : "flat"} size="sm" color={logged ? "warning" : undefined} radius="none" aria-label="edit vehicle"
+                            className={`w-[40px] min-w-0 p-0 h-[35px] rounded-sm ${!logged && "bg-gray-700 cursor-default"} transition-opacity`}><MdEdit size={20} /></Button>
+                    </PopoverContent>
+                </Popover>
             </footer>
         </motion.article >
     )

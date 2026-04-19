@@ -16,7 +16,7 @@ export default function ViewComponent({ id, mbView }: { id: number, mbView: bool
     return (
         <div >
             <Button variant="ghost" size="sm" color="warning" radius="none" onPress={onClick} aria-label="view vehicle"
-                className={`w-[40px] min-w-0 min-h-0 h-[35px] p-0 rounded-sm ${!mbView && "opacity-0 lg:opacity-100 lg:z-0 -z-100"} transition-opacity lg:relative absolute bottom-0 right-0`}>
+                className={`w-[40px] min-w-0 min-h-0 h-[35px] p-0 rounded-sm ${!mbView && "opacity-0 lg:opacity-100 lg:z-0 -z-100"} transition-opacity lg:relative`}>
                 <GrView size={18} />
             </Button>
             {vehicle &&

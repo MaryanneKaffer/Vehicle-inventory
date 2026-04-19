@@ -29,7 +29,7 @@ export default function DeleteComponent({ name, id, setPage, mbDelete, logged }:
         <>
             <Tooltip delay={200} content={!logged && "Login first"} className={`${logged && "hidden"}`} placement="bottom">
                 <Button variant={logged ? "ghost" : "flat"} size="sm" color={logged ? "danger" : undefined} radius="none" onPress={handleOpen} aria-label="delete vehicle"
-                    className={`w-[40px] min-w-0 p-0 h-[35px] rounded-sm group-hover:opacity-100 ${!mbDelete && "opacity-0 -z-100 lg:z-10"} ${!logged && "bg-gray-700 cursor-default"} transition-opacity`}>
+                    className={`w-[40px] min-w-0 p-0 h-[35px] rounded-sm ${!logged && "bg-gray-700 cursor-default"} transition-opacity`}>
                     <MdDelete size={20} />
                 </Button>
             </Tooltip>

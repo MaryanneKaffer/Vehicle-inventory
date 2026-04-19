@@ -27,8 +27,7 @@ export default function PostComponent({ setPage, screen, logged }: { setPage: (p
             const formData = convertToVehicleFormData(data);
             await PostVehicle(formData, logged?.id || 0);
             reset(); setPreview(null);
-            setPage(1);
-            onOpenChange();
+            setPage(1); onOpenChange();
         } catch (err: any) {
             setMessage(err.message);
         } finally {
