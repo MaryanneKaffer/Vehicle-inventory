@@ -86,6 +86,19 @@ export const PostVehicle = async (data: FormData, userId: number) => {
     return createResponse.json();
 };
 
+export const EditVehicle = async (id: number, data: FormData) => {
+    const response = await fetch(`${API_URL}/vehicles/update/${id}`, {
+        method: "PUT",
+        headers: getAuthHeaders(),
+        body: data,
+    });
+    if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || "Unknown error");
+    }
+    return response.json();
+}
+
 export const DeleteVehicle = async (id: number) => {
     const response = await fetch(`${API_URL}/vehicles/delete/${id}`, {
         method: "DELETE",

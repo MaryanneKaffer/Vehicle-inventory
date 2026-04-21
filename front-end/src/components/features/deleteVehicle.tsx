@@ -4,7 +4,7 @@ import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Tooltip, useD
 import { useState } from "react";
 import { MdDelete } from "react-icons/md";
 
-export default function DeleteComponent({ name, id, setPage, mbDelete, logged }: { name: string, id: number, setPage: (page: number) => void, mbDelete: boolean, logged: any }) {
+export default function DeleteComponent({ name, id, setPage, logged }: { name: string, id: number, setPage: (page: number) => void, mbDelete: boolean, logged: any }) {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const [error, setError] = useState("")
 

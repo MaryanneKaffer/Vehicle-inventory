@@ -2,14 +2,15 @@ import { Button } from "@heroui/button";
 import { Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@heroui/modal";
 import ControllerInput from "../ui/controllerInput";
 import { useForm } from "react-hook-form";
-import { PostVehicle } from "@/api/vehicles";
+import { EditVehicle, PostVehicle } from "@/api/vehicles";
 import { Input } from "@heroui/input";
 import { useEffect, useRef, useState } from "react";
 import { convertToVehicleFormData } from "../utils/convertToVehicle";
 import { Tooltip } from "@heroui/tooltip";
 import { User } from "@/api/users";
+import { MdEdit } from "react-icons/md";
 
-export default function PostComponent({ setPage, screen, logged }: { setPage: (pages: number) => void, screen?: string, logged?: User }) {
+export default function PostComponent({ setPage, screen, logged, editId }: { setPage: (pages: number) => void, screen?: string, logged?: User, editId?: number }) {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const { control, handleSubmit, reset, register } = useForm();
     const fileRef = useRef<HTMLInputElement | null>(null);
@@ -25,7 +26,11 @@ export default function PostComponent({ setPage, screen, logged }: { setPage: (p
         setLoading(true);
         try {
             const formData = convertToVehicleFormData(data);
-            await PostVehicle(formData, logged?.id || 0);
+            if (editId) {
+                await EditVehicle(editId, formData);
+            } else {
+                await PostVehicle(formData, logged?.id || 0);
+            }
             reset(); setPreview(null);
             setPage(1); onOpenChange();
         } catch (err: any) {
@@ -45,14 +50,33 @@ export default function PostComponent({ setPage, screen, logged }: { setPage: (p
         if (!isOpen) { reset(); setMessage(""); setPreview(null); }
     }, [isOpen, reset]);
 
+    useEffect(() => {
+        if (!editId || !isOpen) return;
+        async function fetchData() {
+            setLoading(true);
+            try {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/vehicles/${editId}`);
+                const data = await response.json();
+                reset(data);
+                if (data?.image) setPreview(data.image);
+            } catch (err) {
+                console.error(err);
+            } finally {
+                setLoading(false);
+            }
+        }
+        fetchData();
+    }, [editId, isOpen]);
+
     return (
         <div >
-            <Tooltip delay={200} content={!logged && "Login first to register vehicles"} className={`${logged && "hidden"}`} placement="bottom">
-                <Button variant={logged ? "ghost" : "flat"} color={logged ? "warning" : undefined} className={`w-full rounded-sm dark:bg-default/60 bg-white ${!logged && "cursor-default"}`} radius="none" onPress={handleOpen} > {screen ? "Register vehicle" : "Register a Vehicle"}  </Button>
+            <Tooltip delay={200} content={!logged && `Login first ${!editId ? "to register vehicles" : ""} `} className={`${logged && "hidden"}`} placement="bottom">
+                <Button variant={logged ? "ghost" : "flat"} size={editId ? "sm" : "md"} color={logged ? "warning" : undefined} radius="none" aria-label={editId ? "edit vehicle" : "register vehicle"} onPress={handleOpen}
+                    className={`w-[40px] min-w-0 p-0 h-[35px] rounded-sm ${!editId && "w-full"} ${!logged && "bg-gray-700 cursor-default"} transition-opacity`}> {editId ? <MdEdit size={20} /> : screen ? "Register vehicle" : "Register a Vehicle"}  </Button>
             </Tooltip>
             <Modal isOpen={isOpen} onOpenChange={onOpenChange} radius="none" className={`rounded-sm bg-secondary ${message ? "h-46" : "h-auto"}`} backdrop="blur" size="2xl">
                 <ModalContent className="items-center flex-1">
-                    <ModalHeader className="flex flex-col gap-1 text-center cursor-default text-warning">Register a Vehicle</ModalHeader>
+                    <ModalHeader className="flex flex-col gap-1 text-center cursor-default text-warning">{editId ? "Edit Vehicle" : "Register a Vehicle"}</ModalHeader>
                     <ModalBody>
                         {message ? <h1 className="text-danger">{message}</h1> : (
                             <form onSubmit={handleSubmit(onSubmit)} className="flex md:flex-row flex-col gap-4">
