@@ -88,6 +88,39 @@ public class VehicleService {
         return repository.save(vehicle);
     }
 
+    public VehicleDTO update(Long id, String name, String description, String brand, String model,
+            BigDecimal price, Integer manufactureYear, MultipartFile image) throws IOException {
+
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Vehicle vehicle = findVehicleById(id);
+
+        if (!vehicle.getOwner().getEmail().equals(currentUser.getEmail())) {
+            throw new AccessDeniedException("You don't have permission to edit this vehicle");
+        }
+
+        if (name != null)
+            vehicle.setName(name);
+        if (description != null)
+            vehicle.setDescription(description);
+        if (brand != null)
+            vehicle.setBrand(brand);
+        if (model != null)
+            vehicle.setModel(model);
+        if (price != null)
+            vehicle.setPrice(price);
+        if (manufactureYear != null)
+            vehicle.setManufactureYear(manufactureYear);
+
+        if (image != null && !image.isEmpty()) {
+            if (vehicle.getImage() != null && !vehicle.getImage().isEmpty()) {
+                deleteImage(vehicle.getImage());
+            }
+            vehicle.setImage(uploadImage(image));
+        }
+
+        return mapToDTO(repository.save(vehicle));
+    }
+
     public void delete(Long id) throws IOException {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Vehicle vehicle = findVehicleById(id);
