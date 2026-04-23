@@ -8,9 +8,29 @@ import { Button } from "@heroui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@heroui/popover";
 import { SlOptions } from "react-icons/sl";
 import PostComponent from "../features/postVehicleComponent";
+import { Tooltip } from "@heroui/react";
+import { MdDelete, MdEdit } from "react-icons/md";
+import { useState } from "react";
+import { GrView } from "react-icons/gr";
+import { User } from "@/api/users";
 
 export default function VehicleCard({ vehicle, mbView, mbDelete, setPage, i, logged }:
-    { vehicle: Vehicle, mbDelete: boolean, mbView: boolean, setPage: (page: number) => void, i: number, logged: any }) {
+    { vehicle: Vehicle, mbDelete: boolean, mbView: boolean, setPage: (page: number) => void, i: number, logged: User | null }) {
+    const [openModal, setOpenModal] = useState("");
+    const [popoverOpen, setPopoverOpen] = useState(false);
+
+    const buttons = [
+        { name: "View", icon: <GrView size={20} /> },
+        { name: "Edit", icon: <MdEdit size={20} /> },
+        { name: "Delete", icon: <MdDelete size={20} /> },
+    ];
+
+    function handleOpen(btn: string) {
+        if (logged || btn === "View") {
+            setOpenModal(btn);
+            setPopoverOpen(false);
+        }
+    }
 
     return (
         <motion.article initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
@@ -39,17 +59,24 @@ export default function VehicleCard({ vehicle, mbView, mbDelete, setPage, i, log
             </div>
 
             <footer className="absolute md:bottom-3 md:right-3 bottom-2 right-2 flex gap-1 items-center lg:opacity-0 group-hover:opacity-100 transition-opacity">
-                <Popover placement="bottom">
+                <Popover placement="bottom" isOpen={popoverOpen} onOpenChange={setPopoverOpen}>
                     <PopoverTrigger>
                         <Button className="min-w-0 bg-transparent py-0"><SlOptions size={20} color="warning" /></Button>
                     </PopoverTrigger>
                     <PopoverContent className="max-w-64 flex flex-row gap-1 items-center rounded-sm bg-default/60 backdrop-blur-lg p-2">
-                        <ViewComponent id={vehicle.id} mbView={mbView} />
-                        <DeleteComponent name={vehicle.name} id={vehicle.id} setPage={setPage} mbDelete={mbDelete} logged={logged || ""} />
-                        <PostComponent setPage={setPage} editId={vehicle.id} logged={logged || ""} />
+                        {buttons.map((btn) => (
+                            <Tooltip key={btn.name} delay={200} content={!logged && btn.name !== "View" ? "Login first" : "View"} className={`${logged && "hidden"}`} placement="bottom">
+                                <Button variant={logged || btn.name === "View" ? "ghost" : "flat"} size={vehicle.id ? "sm" : "md"} color={logged || btn.name === "View" ? "warning" : undefined} radius="none" aria-label={`${btn.name} vehicle`} onPress={() => handleOpen(btn.name)}
+                                    className={`w-[40px] min-w-0 p-0 h-[35px] rounded-sm ${!vehicle.id && "w-full"} ${!logged && btn.name !== "View"  && "bg-gray-700 cursor-default"} transition-opacity`}> {btn.icon} </Button>
+                            </Tooltip>
+                        ))}
+
                     </PopoverContent>
                 </Popover>
             </footer>
+            {openModal === "View" && <ViewComponent id={vehicle.id} mbView={mbView} isOpen={openModal === "View"} change={() => setOpenModal("")} />}
+            {openModal === "Delete" && <DeleteComponent name={vehicle.name} id={vehicle.id} setPage={setPage} mbDelete={mbDelete} logged={logged || ""} isOpen={openModal === "Delete"} change={() => setOpenModal("")} />}
+            {openModal === "Edit" && <PostComponent setPage={setPage} editId={vehicle.id} logged={logged || null} isOpen={openModal === "Edit"} change={() => setOpenModal("")} />}
         </motion.article >
     )
 }

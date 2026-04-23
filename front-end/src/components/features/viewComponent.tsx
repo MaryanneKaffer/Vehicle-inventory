@@ -1,26 +1,19 @@
 import { Button } from "@heroui/button";
-import { Modal, ModalBody, ModalContent, useDisclosure } from "@heroui/modal";
-import { useState } from "react";
-import { GrView } from "react-icons/gr";
+import { Modal, ModalBody, ModalContent } from "@heroui/modal";
+import { useEffect, useState } from "react";
 import { GetVehicleById, Vehicle } from "@/api/vehicles";
 
-export default function ViewComponent({ id, mbView }: { id: number, mbView: boolean }) {
+export default function ViewComponent({ id, isOpen, change }: { id: number, mbView: boolean, isOpen: boolean, change: () => void }) {
     const [vehicle, setVehicle] = useState<Vehicle>()
-    const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-    function onClick() {
-        onOpen();
+    useEffect(() => {
         GetVehicleById(id, setVehicle);
-    }
+    }, [id, isOpen]);
 
     return (
         <div >
-            <Button variant="ghost" size="sm" color="warning" radius="none" onPress={onClick} aria-label="view vehicle"
-                className={`w-[40px] min-w-0 min-h-0 h-[35px] p-0 rounded-sm ${!mbView && "opacity-0 lg:opacity-100 lg:z-0 -z-100"} transition-opacity lg:relative`}>
-                <GrView size={18} />
-            </Button>
             {vehicle &&
-                <Modal isOpen={isOpen} onOpenChange={onOpenChange} radius="none" className="rounded-sm bg-secondary" backdrop="blur" size="3xl" classNames={{ body: "sm:px-8 w-full" }}>
+                <Modal isOpen={isOpen} onOpenChange={change} radius="none" className="rounded-sm bg-secondary" backdrop="blur" size="3xl" classNames={{ body: "sm:px-8 w-full" }}>
                     <ModalContent className="items-center flex-1">
                         <ModalBody className="flex-1 gap-4 h-full">
                             <form className="flex md:flex-row flex-col gap-4 h-full mt-4">
@@ -41,7 +34,7 @@ export default function ViewComponent({ id, mbView }: { id: number, mbView: bool
                                     <p className="my-auto">{vehicle.description}</p>
                                 </div >
                             </form>
-                            <Button color="warning" radius="none" variant="ghost" onPress={onOpenChange} className="mb-2 rounded-sm">
+                            <Button color="warning" radius="none" variant="ghost" onPress={change} className="mb-2 rounded-sm">
                                 Close
                             </Button>
                         </ModalBody>
