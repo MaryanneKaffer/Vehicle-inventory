@@ -3,7 +3,7 @@ import { Modal, ModalBody, ModalContent } from "@heroui/modal";
 import { useEffect, useState } from "react";
 import { GetVehicleById, Vehicle } from "@/api/vehicles";
 
-export default function ViewComponent({ id, isOpen, change }: { id: number, mbView: boolean, isOpen: boolean, change: () => void }) {
+export default function ViewComponent({ id, isOpen, change }: { id: number, isOpen: boolean, change: () => void }) {
     const [vehicle, setVehicle] = useState<Vehicle>()
 
     useEffect(() => {

@@ -3,7 +3,7 @@ import { Button } from "@heroui/button";
 import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@heroui/react";
 import { useState } from "react";
 
-export default function DeleteComponent({ name, id, setPage, isOpen, change }: { name: string, id: number, setPage: (page: number) => void, mbDelete: boolean, logged: any, isOpen: boolean, change: () => void }) {
+export default function DeleteComponent({ name, id, setPage, isOpen, change }: { name: string, id: number, setPage: (page: number) => void, logged: any, isOpen: boolean, change: () => void }) {
     const [error, setError] = useState("")
 
     async function onDelete() {

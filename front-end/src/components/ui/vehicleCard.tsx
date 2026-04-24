@@ -14,8 +14,7 @@ import { useState } from "react";
 import { GrView } from "react-icons/gr";
 import { User } from "@/api/users";
 
-export default function VehicleCard({ vehicle, mbView, mbDelete, setPage, i, logged }:
-    { vehicle: Vehicle, mbDelete: boolean, mbView: boolean, setPage: (page: number) => void, i: number, logged: User | null }) {
+export default function VehicleCard({ vehicle, setPage, i, logged }: { vehicle: Vehicle, setPage: (page: number) => void, i: number, logged: User | null }) {
     const [openModal, setOpenModal] = useState("");
     const [popoverOpen, setPopoverOpen] = useState(false);
 
@@ -67,15 +66,14 @@ export default function VehicleCard({ vehicle, mbView, mbDelete, setPage, i, log
                         {buttons.map((btn) => (
                             <Tooltip key={btn.name} delay={200} content={!logged && btn.name !== "View" ? "Login first" : "View"} className={`${logged && "hidden"}`} placement="bottom">
                                 <Button variant={logged || btn.name === "View" ? "ghost" : "flat"} size={vehicle.id ? "sm" : "md"} color={logged || btn.name === "View" ? "warning" : undefined} radius="none" aria-label={`${btn.name} vehicle`} onPress={() => handleOpen(btn.name)}
-                                    className={`w-[40px] min-w-0 p-0 h-[35px] rounded-sm ${!vehicle.id && "w-full"} ${!logged && btn.name !== "View"  && "bg-gray-700 cursor-default"} transition-opacity`}> {btn.icon} </Button>
+                                    className={`w-[40px] min-w-0 p-0 h-[35px] rounded-sm ${!vehicle.id && "w-full"} ${!logged && btn.name !== "View" && "bg-gray-700 cursor-default"} transition-opacity`}> {btn.icon} </Button>
                             </Tooltip>
                         ))}
-
                     </PopoverContent>
                 </Popover>
             </footer>
-            {openModal === "View" && <ViewComponent id={vehicle.id} mbView={mbView} isOpen={openModal === "View"} change={() => setOpenModal("")} />}
-            {openModal === "Delete" && <DeleteComponent name={vehicle.name} id={vehicle.id} setPage={setPage} mbDelete={mbDelete} logged={logged || ""} isOpen={openModal === "Delete"} change={() => setOpenModal("")} />}
+            {openModal === "View" && <ViewComponent id={vehicle.id} isOpen={openModal === "View"} change={() => setOpenModal("")} />}
+            {openModal === "Delete" && <DeleteComponent name={vehicle.name} id={vehicle.id} setPage={setPage} logged={logged || ""} isOpen={openModal === "Delete"} change={() => setOpenModal("")} />}
             {openModal === "Edit" && <PostComponent setPage={setPage} editId={vehicle.id} logged={logged || null} isOpen={openModal === "Edit"} change={() => setOpenModal("")} />}
         </motion.article >
     )
