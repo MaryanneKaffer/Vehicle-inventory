@@ -60,7 +60,7 @@ export default function PostComponent({ setPage, logged, editId, isOpen, change 
     }, [editId, isOpen]);
 
     return (
-        <Modal isOpen={isOpen} onOpenChange={change} radius="none" className={`rounded-sm bg-secondary ${message ? "h-46" : "h-auto"}`} backdrop="blur" size="2xl">
+        <Modal isOpen={isOpen} onOpenChange={change} radius="none" className={`rounded-sm dark:bg-secondary ${message ? "h-46" : "h-auto"}`} backdrop="blur" size="2xl">
             <ModalContent className="items-center flex-1">
                 <ModalHeader className="flex flex-col gap-1 text-center cursor-default text-warning">{editId ? "Edit Vehicle" : "Register a Vehicle"}</ModalHeader>
                 <ModalBody>

@@ -13,7 +13,7 @@ export default function ViewComponent({ id, isOpen, change }: { id: number, isOp
     return (
         <div >
             {vehicle &&
-                <Modal isOpen={isOpen} onOpenChange={change} radius="none" className="rounded-sm bg-secondary" backdrop="blur" size="3xl" classNames={{ body: "sm:px-8 w-full" }}>
+                <Modal isOpen={isOpen} onOpenChange={change} radius="none" className="rounded-sm dark:bg-secondary" backdrop="blur" size="3xl" classNames={{ body: "sm:px-8 w-full" }}>
                     <ModalContent className="items-center flex-1">
                         <ModalBody className="flex-1 gap-4 h-full">
                             <form className="flex md:flex-row flex-col gap-4 h-full mt-4">

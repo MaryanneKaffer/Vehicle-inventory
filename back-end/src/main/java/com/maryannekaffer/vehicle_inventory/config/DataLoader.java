@@ -3,6 +3,7 @@ package com.maryannekaffer.vehicle_inventory.config;
 import java.io.InputStream;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +19,12 @@ import tools.jackson.databind.ObjectMapper;
 @Configuration
 public class DataLoader {
 
+    @Value("${admin.email}")
+    private String adminEmail;
+
+    @Value("${admin.password}")
+    private String adminPassword;
+
     @Bean
     @SuppressWarnings("unused")
     CommandLineRunner loadData(VehicleRepository vehicleRepository, UserRepository userRepository) {
@@ -27,8 +34,8 @@ public class DataLoader {
 
             User defaultOwner = new User();
             defaultOwner.setUsername("Auto");
-            defaultOwner.setEmail("admin@email.com");
-            defaultOwner.setPassword("123456");
+            defaultOwner.setEmail(adminEmail);
+            defaultOwner.setPassword(adminPassword);
 
             userRepository.save(defaultOwner);
 

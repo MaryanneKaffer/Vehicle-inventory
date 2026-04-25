@@ -26,6 +26,8 @@ export default function IndexPage() {
   const [isOpenFiltering, setFiltering] = useState(false)
   const [isOpenPost, setOpenPost] = useState(false);
   const { user } = useContext(AuthContext);
+  const [openTooltip, setOpenTooltip] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(false);
 
   const fetchData = (targetPage: number) => {
     GetVehicles({ filter: filter.filter(Boolean).join("&"), page: targetPage, setMessage, setLoading, setVehicles, setApiLength, setApiPages });
@@ -46,23 +48,38 @@ export default function IndexPage() {
   function PostBtn() {
     const handleOpen = () => {
       if (user) { setOpenPost(true); }
+      setOpenTooltip(true)
     };
-    return (<Tooltip delay={200} content={!user && "Login first"} className={`${user && "hidden"}`} placement="bottom">
-      <Button variant={user ? "ghost" : "flat"} size="md" color={user ? "warning" : undefined} radius="none" aria-label="Post vehicle" onPress={() => handleOpen()}
-        className={`rounded-sm w-full ${!user && "bg-gray-700 cursor-default"} transition-opacity`}> Register a Vehicle </Button>
-    </Tooltip>)
+    return (
+      <Tooltip delay={200} content={!user && "Login first"} className={`${user && "hidden"}`} placement="bottom" isOpen={openTooltip} onOpenChange={setOpenTooltip}  >
+        <Button variant={user ? "ghost" : "flat"} size="md" color={user ? "warning" : undefined} radius="none" aria-label="Post vehicle" onPress={handleOpen}
+          className={`rounded-sm w-full ${!user && "dark:bg-gray-700 bg-gray-400 cursor-default"} transition-opacity`}>
+          Register a Vehicle
+        </Button>
+      </Tooltip>
+    );
   }
+
+  useEffect(() => {
+    if (screen.includes("small")) {
+      const handleScroll = () => setShowSidebar(window.scrollY > 150);
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    } else {
+      setShowSidebar(true);
+    }
+  }, []);
 
   return (
     <DefaultLayout>
       <Resize setScreen={setScreen} />
       <section className="flex flex-col items-center gap-2 sm:gap-4">
         <div className="flex w-full gap-2 dark:bg-default/60 bg-gray-300/90 rounded-[3px] p-3 items-center justify-between h-12">
-          <ThemeSwitch />
           <LoginInfo />
+          <ThemeSwitch />
         </div>
         <div className="h-full w-full flex lg:flex-row flex-col gap-2 sm:gap-4">
-          <div className="relative left-0 sticky top-5 -mx-6 xl:m-0 px-5 md:-mx-12 md:px-12 z-50 dark:bg-default/0 bg-gray-300/90 xl:p-0 py-2 backdrop-blur-md lg:w-fit w-[100dvw] items-center h-fit ">
+          <div className="relative left-0 sticky top-2 -mx-6 xl:m-0 px-5 md:-mx-12 md:px-12 z-50 dark:bg-default/0 bg-gray-300/90 xl:p-0 py-2 backdrop-blur-md lg:w-fit w-[100dvw] items-center h-fit ">
             {screen.includes("small") && < div className="flex gap-1 items-center">
               <Button color="warning" radius="none" className="rounded-sm flex-1 min-w-16" onPress={() => setFiltering(!isOpenFiltering)} >Filters</Button>
               <PostBtn />
@@ -78,15 +95,15 @@ export default function IndexPage() {
               logged={user} />
             {!message && <PageNavigation apiPages={apiPages} setPage={setPage} page={page} />}
           </div>
-          {!screen.includes("small") && <div className="w-10">
-            <div className="flex flex-col gap-2 sticky top-5 ">
+          <div className={`md:w-10 w-[100dvw] transition-all ${showSidebar ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
+            <div className="flex md:flex-col -mx-5 xl:m-0 px-5 md:-mx-0 md:px-0 w-full md:gap-2 gap-1 md:sticky fixed md:top-5 top-17 justify-between">
               <PageJump />
-              <span className="p-2 bg-default/60 rounded-sm text-warning items-center justify-center flex flex-col">
-                <FaCar size={16} />
-                <p>{apiLength}</p>
+              <span className="w-10 p-2 md:bg-gray-300/80 md:dark:bg-default/60 dark:bg-default/90 backdrop-blur-lg rounded-sm text-warning items-center justify-center flex flex-col">
+                <FaCar className="md:text-[16px] text-[12px]" />
+                <p className="md:text-base text-sm">{apiLength}</p>
               </span>
             </div>
-          </div>}
+          </div>
         </div>
       </section>
       {isOpenPost && user && <PostComponent setPage={setPage} logged={user || undefined} isOpen={isOpenPost} change={() => setOpenPost(!isOpenPost)} />}

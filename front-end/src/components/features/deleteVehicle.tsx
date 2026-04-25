@@ -18,7 +18,7 @@ export default function DeleteComponent({ name, id, setPage, isOpen, change }: {
     }
 
     return (
-        <Modal isOpen={isOpen} onOpenChange={change} radius="none" className="rounded-sm bg-secondary" backdrop="blur">
+        <Modal isOpen={isOpen} onOpenChange={change} radius="none" className="rounded-sm dark:bg-secondary" backdrop="blur">
             <ModalContent className="items-center flex-1">
                 <ModalHeader className="flex flex-col gap-1 text-center cursor-default text-warning">{error ? "Access denied" : "Are you sure you want to delete this vehicle?"}</ModalHeader>
                 <ModalBody className="flex-1 -gap-4 justify-center text-center">

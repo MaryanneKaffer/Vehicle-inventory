@@ -34,7 +34,7 @@ export default function LoginInfo() {
             </Button>
             <Modal onClose={handleClose} className="rounded-sm dark:bg-secondary transition-all" backdrop="blur" isOpen={isOpen} onOpenChange={onOpenChange} radius="none"
                 classNames={{
-                    base: `${register || login ? "min-w-[400px] " : user ? "min-w-[300px]" : "min-w-[250px] "} max-w-fit dark:bg-secondary rounded-sm`,
+                    base: `${register || login ? "md:min-w-[400px] min-w-[350px]" : user ? "min-w-[300px]" : "min-w-[250px] "} max-w-fit dark:bg-secondary rounded-sm`,
                     body: "w-full pb-5", wrapper: "flex items-center justify-center",
                 }}>
                 <ModalContent className="items-center flex-1 relative">

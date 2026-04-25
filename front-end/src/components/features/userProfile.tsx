@@ -10,8 +10,9 @@ export default function UserProfile({ user }: { user: any }) {
                 <h2>{user.email}</h2>
             </div>
             <div className="flex flex-col ">
-                <h2 className="text-gray-300">Permissions</h2>
+                <h2 className="dark:text-gray-300">Permissions</h2>
                 <p><span className="text-warning">  Register: </span> Up to 3 vehicles at once </p>
+                <p><span className="text-warning">  Edit: </span> Only own vehicles </p>
                 <p><span className="text-warning">  Delete: </span> Only own vehicles </p>
             </div>
         </div>

@@ -29,7 +29,7 @@ export default function PostUserComponent({ setRegister }: { setRegister: (value
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-            <div className="relative mx-auto md:size-[130px] group border-2 border-warning flex items-center justify-center cursor-pointer overflow-hidden rounded-full"
+            <div className="relative mx-auto size-[130px] group border-2 border-warning flex items-center justify-center cursor-pointer overflow-hidden rounded-full"
                 onClick={() => fileRef.current?.click()} >
                 <Input type="file" className="hidden absolute" {...rest} radius="none"
                     ref={(e: any) => { ref(e); fileRef.current = e; }}
