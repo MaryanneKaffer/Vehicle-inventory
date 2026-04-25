@@ -38,7 +38,7 @@ export default function VehicleCard({ vehicle, setPage, i, logged }: { vehicle: 
 
             {vehicle.image ? (
                 <img src={vehicle.image} fetchPriority={i === 0 ? "high" : "auto"} alt={`${vehicle.brand} ${vehicle.model}`} loading={i === 0 ? "eager" : "lazy"}
-                    className="md:h-35 h-24 w-full object-cover rounded-[3px] mb-2 aspect-video bg-default-200" />
+                    className="xl:h-35 h-24 w-full object-cover rounded-[3px] mb-2 aspect-video bg-default-200" />
             ) : (
                 <IoCarSport className="md:h-35 h-30 w-full object-cover rounded-[3px] mb-2 bg-warning text-white" />
             )}

@@ -68,7 +68,7 @@ export default function IndexPage() {
     } else {
       setShowSidebar(true);
     }
-  }, []);
+  }, [screen]);
 
   return (
     <DefaultLayout>
@@ -79,7 +79,7 @@ export default function IndexPage() {
           <ThemeSwitch />
         </div>
         <div className="h-full w-full flex lg:flex-row flex-col gap-2 sm:gap-4">
-          <div className="relative left-0 sticky top-2 -mx-6 xl:m-0 px-5 md:-mx-12 md:px-12 z-50 dark:bg-default/0 bg-gray-300/90 xl:p-0 py-2 backdrop-blur-md lg:w-fit w-[100dvw] items-center h-fit ">
+          <div className="relative left-0 sticky top-2 -mx-6 xl:m-0 px-5 md:-mx-12 md:px-12 z-50 dark:bg-default/0 bg-gray-300/90 xl:p-0 py-2 lg:backdrop-blur-none backdrop-blur-md lg:w-fit w-[100dvw] items-center h-fit ">
             {screen.includes("small") && < div className="flex gap-1 items-center">
               <Button color="warning" radius="none" className="rounded-sm flex-1 min-w-16" onPress={() => setFiltering(!isOpenFiltering)} >Filters</Button>
               <PostBtn />
@@ -95,10 +95,10 @@ export default function IndexPage() {
               logged={user} />
             {!message && <PageNavigation apiPages={apiPages} setPage={setPage} page={page} />}
           </div>
-          <div className={`md:w-10 w-[100dvw] transition-all ${showSidebar ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
-            <div className="flex md:flex-col -mx-5 xl:m-0 px-5 md:-mx-0 md:px-0 w-full md:gap-2 gap-1 md:sticky fixed md:top-5 top-17 justify-between">
+          <div className={`lg:w-10 w-[100dvw] transition-all ${showSidebar ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
+            <div className="flex lg:flex-col -mx-5 xl:m-0 px-5  md:-mx-12 md:px-12  lg:-mx-0 lg:px-0 w-full lg:gap-2 gap-1 lg:sticky fixed lg:top-5 top-17 justify-between">
               <PageJump />
-              <span className="w-10 p-2 md:bg-gray-300/80 md:dark:bg-default/60 dark:bg-default/90 backdrop-blur-lg rounded-sm text-warning items-center justify-center flex flex-col">
+              <span className="w-10 p-2 lg:bg-gray-300/80 lg:dark:bg-default/60 dark:bg-default/90 backdrop-blur-lg rounded-sm text-warning items-center justify-center flex flex-col">
                 <FaCar className="md:text-[16px] text-[12px]" />
                 <p className="md:text-base text-sm">{apiLength}</p>
               </span>

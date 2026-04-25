@@ -13,10 +13,10 @@ export default function PageJump() {
     };
     return (
         <div className="rounded-md md:h-auto h-14 flex flex-col">
-            <Button radius="none" className="rounded-t-sm min-w-0 bg-gray-300/80 md:dark:bg-default/60 dark:bg-default/90 backdrop-blur-lg text-warning" aria-label="go to the top" onPress={() => handleScroll("top")}>
-                <FaAngleUp className="md:text-[20px] text-[12px]" /></Button>
-            <Button radius="none" className="rounded-b-sm min-w-0 bg-gray-300/80 md:dark:bg-default/60 dark:bg-default/90 backdrop-blur-lg text-warning" aria-label="go to the end" onPress={() => handleScroll("end")}>
-                <FaAngleDown className="md:text-[20px] text-[12px]" /></Button>
+            <Button radius="none" className="rounded-t-sm min-w-0 bg-gray-300/80 lg:dark:bg-default/60 dark:bg-default/90 backdrop-blur-lg text-warning" aria-label="go to the top" onPress={() => handleScroll("top")}>
+                <FaAngleUp className="lg::text-[20px] text-[12px]" /></Button>
+            <Button radius="none" className="rounded-b-sm min-w-0 bg-gray-300/80 lg:dark:bg-default/60 dark:bg-default/90 backdrop-blur-lg text-warning" aria-label="go to the end" onPress={() => handleScroll("end")}>
+                <FaAngleDown className="lg::text-[20px] text-[12px]" /></Button>
         </div>
     )
 }
