@@ -3,11 +3,11 @@ import { Vehicle } from "@/api/vehicles";
 import VehicleCard from "../ui/vehicleCard";
 import { User } from "@/api/users";
 
-export default function VehiclesList({ vehicles, loading, message, apiPages, setPage, screen, logged }: {
-    setPage: (page: number) => void, vehicles: Vehicle[], loading: boolean, message: string, apiPages: number, screen: string, logged: User | null
+export default function VehiclesList({ vehicles, loading, message, setPage, screen, logged }: {
+    setPage: (page: number) => void, vehicles: Vehicle[], loading: boolean, message: string, screen: string, logged: User | null
 }) {
     return (
-        <div className={`w-full flex flex-col gap-2 sm:gap-4  ${apiPages < 2 ? "h-full" : "min-h-[1000px]"}`}>
+        <div className={`w-full flex flex-col gap-2 sm:gap-4 min-h-[700px]`}>
             {message ? (<p className="text-center text-red-500">{message}</p>)
                 : loading && (
                     <div className="min-h-[100px] flex">

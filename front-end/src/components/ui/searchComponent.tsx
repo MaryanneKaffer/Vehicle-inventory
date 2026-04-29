@@ -1,4 +1,5 @@
 import SearchInput from "../utils/searchInput";
+import PageSize from "./pageSize";
 
 export default function SearchComponent({ setFilter }: { setFilter: React.Dispatch<React.SetStateAction<string[]>> }) {
     const fields = ["name", "brand", "model", "price", "manufactureYear"];
@@ -21,6 +22,7 @@ export default function SearchComponent({ setFilter }: { setFilter: React.Dispat
                     setFilter={setFilterAtIndex}
                 />
             ))}
+            <PageSize />
         </div>
     );
 }

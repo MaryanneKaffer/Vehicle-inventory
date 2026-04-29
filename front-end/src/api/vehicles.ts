@@ -15,15 +15,15 @@ export interface Vehicle {
 
 const getAuthHeaders = () => ({ "Authorization": `Bearer ${localStorage.getItem('token')}` });
 
-export const GetVehicles = async ({ filter, page, setMessage, setLoading, setVehicles, setApiLength, setApiPages }: {
+export const GetVehicles = async ({ filter, page, setMessage, setLoading, setVehicles, setApiLength, setApiPages, pageSize }: {
     filter: string, page: number, setMessage: (message: string) => void, setLoading: (loading: boolean) => void, setVehicles: (vehicles: Vehicle[]) => void,
-    setApiLength: (length: number) => void, setApiPages: (pages: number) => void
+    setApiLength: (length: number) => void, setApiPages: (pages: number) => void, pageSize?: number
 }) => {
     setMessage("");
     setLoading(true);
 
     try {
-        const response = await fetch(`${API_URL}/vehicles/get?${filter}&page=${page - 1}&size=20`, { priority: 'high' });
+        const response = await fetch(`${API_URL}/vehicles/get?${filter}&page=${page - 1}&size=${pageSize || 20}`, { priority: 'high' });
         const data = await response.json();
 
         if (!response.ok) {

@@ -29,20 +29,21 @@ export default function IndexPage() {
   const [openTooltip, setOpenTooltip] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
 
-  const fetchData = (targetPage: number) => {
-    GetVehicles({ filter: filter.filter(Boolean).join("&"), page: targetPage, setMessage, setLoading, setVehicles, setApiLength, setApiPages });
+  const fetchData = (targetPage: number, pageSize: number) => {
+    GetVehicles({ filter: filter.filter(Boolean).join("&"), page: targetPage, setMessage, setLoading, setVehicles, setApiLength, setApiPages, pageSize });
   };
 
   useEffect(() => {
-    if (page !== 1) {
+    const handlePageSizeChange = () => {
+      fetchData(1, Number(localStorage.getItem("pageSize") || 20));
       setPage(1);
-    } else {
-      fetchData(1);
-    }
+    };
+    window.addEventListener("pageSizeChange", handlePageSizeChange);
+    return () => window.removeEventListener("pageSizeChange", handlePageSizeChange);
   }, [filter]);
 
   useEffect(() => {
-    fetchData(page);
+    fetchData(page, Number(localStorage.getItem("pageSize") || 20));
   }, [page]);
 
   function PostBtn() {
@@ -84,15 +85,14 @@ export default function IndexPage() {
               <Button color="warning" radius="none" className="rounded-sm flex-1 min-w-16" onPress={() => setFiltering(!isOpenFiltering)} >Filters</Button>
               <PostBtn />
             </div>}
-            <div className={`xl:w-[300px] lg:w-[200px w-[100%] lg:flex absolute flex-col gap-4 lg:dark:bg-default/60 lg:bg-gray-300/90 bg-transparent rounded-sm lg:p-3 lg:sticky h-fit top-10 
-              ${isOpenFiltering ? "block" : "lg:block hidden"} -mx-4 lg:m-0 px-4 py-3 `}>
+            <div className={`xl:w-[300px] lg:w-[200px] w-[100%] lg:flex absolute flex-col gap-4 lg:dark:bg-default/60 lg:bg-gray-300/90 bg-transparent rounded-sm lg:p-3 lg:sticky h-fit top-10 
+              ${isOpenFiltering ? "block" : "lg:block hidden"} -mx-5 lg:m-0 px-5 py-3 `}>
               <SearchComponent setFilter={setFilter} />
               {!screen.includes("small") && <PostBtn />}
             </div>
           </div>
           <div className="flex-1 w-full justify-items-center">
-            <VehiclesList setPage={setPage} vehicles={vehicles} loading={loading} message={message} apiPages={apiPages} screen={screen}
-              logged={user} />
+            <VehiclesList setPage={setPage} vehicles={vehicles} loading={loading} message={message} screen={screen} logged={user} />
             {!message && <PageNavigation apiPages={apiPages} setPage={setPage} page={page} />}
           </div>
           <div className={`lg:w-10 w-[100dvw] transition-all ${showSidebar ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
