@@ -1,11 +1,33 @@
 import { Button } from "@heroui/button";
-import { Vehicle } from "@/api/vehicles";
+import { GetVehicles, Vehicle } from "@/api/vehicles";
 import VehicleCard from "../ui/vehicleCard";
 import { User } from "@/api/users";
+import { useEffect, useState } from "react";
 
-export default function VehiclesList({ vehicles, loading, message, setPage, screen, logged }: {
-    setPage: (page: number) => void, vehicles: Vehicle[], loading: boolean, message: string, screen: string, logged: User | null
+export default function VehiclesList({ setPage, screen, logged, filter, message, setMessage, setApiLength, setApiPages, page }: {
+    setPage: (page: number) => void, message: string, screen: string, logged: User | null, filter: string[], page: number,
+    setMessage: (message: string) => void, setApiLength: (length: number) => void, setApiPages: (pages: number) => void
 }) {
+    const [vehicles, setVehicles] = useState<Vehicle[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    const fetchData = (targetPage: number, pageSize: number) => {
+        GetVehicles({ filter: filter.filter(Boolean).join("&"), page: targetPage, setMessage, setLoading, setVehicles, setApiLength, setApiPages, pageSize });
+    };
+
+    useEffect(() => {
+        const handlePageSizeChange = () => {
+            fetchData(1, Number(localStorage.getItem("pageSize") || 20));
+            setPage(1);
+        };
+        window.addEventListener("pageSizeChange", handlePageSizeChange);
+        return () => window.removeEventListener("pageSizeChange", handlePageSizeChange);
+    }, [filter]);
+
+    useEffect(() => {
+        fetchData(page, Number(localStorage.getItem("pageSize") || 20));
+    }, [page]);
+
     return (
         <div className={`w-full flex flex-col gap-2 sm:gap-4 min-h-[700px]`}>
             {message ? (<p className="text-center text-red-500">{message}</p>)

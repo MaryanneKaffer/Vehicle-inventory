@@ -4,7 +4,6 @@ import SearchComponent from "@/components/ui/searchComponent";
 import { ThemeSwitch } from "@/components/features/theme-switch";
 import VehiclesList from "@/components/features/vehiclesList";
 import PostComponent from "@/components/features/postVehicleComponent";
-import { GetVehicles, Vehicle } from "@/api/vehicles";
 import PageNavigation from "@/components/ui/pagination";
 import { Button } from "@heroui/button";
 import Resize from "@/components/utils/resize";
@@ -18,9 +17,6 @@ export default function IndexPage() {
   const [filter, setFilter] = useState<string[]>([]);
   const [apiLength, setApiLength] = useState(0);
   const [page, setPage] = useState(1);
-  const [vehicles, setVehicles] = useState<Vehicle[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [message, setMessage] = useState("");
   const [apiPages, setApiPages] = useState(0);
   const [screen, setScreen] = useState("");
   const [isOpenFiltering, setFiltering] = useState(false)
@@ -28,23 +24,7 @@ export default function IndexPage() {
   const { user } = useContext(AuthContext);
   const [openTooltip, setOpenTooltip] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
-
-  const fetchData = (targetPage: number, pageSize: number) => {
-    GetVehicles({ filter: filter.filter(Boolean).join("&"), page: targetPage, setMessage, setLoading, setVehicles, setApiLength, setApiPages, pageSize });
-  };
-
-  useEffect(() => {
-    const handlePageSizeChange = () => {
-      fetchData(1, Number(localStorage.getItem("pageSize") || 20));
-      setPage(1);
-    };
-    window.addEventListener("pageSizeChange", handlePageSizeChange);
-    return () => window.removeEventListener("pageSizeChange", handlePageSizeChange);
-  }, [filter]);
-
-  useEffect(() => {
-    fetchData(page, Number(localStorage.getItem("pageSize") || 20));
-  }, [page]);
+  const [message, setMessage] = useState("");
 
   function PostBtn() {
     const handleOpen = () => {
@@ -52,7 +32,7 @@ export default function IndexPage() {
       setOpenTooltip(true)
     };
     return (
-      <Tooltip delay={200} content={!user && "Login first"} className={`${user && "hidden"}`} placement="bottom" isOpen={openTooltip} onOpenChange={setOpenTooltip}  >
+      <Tooltip delay={200} content={!user && "Login first"} className={`${user && "hidden"}`} placement="bottom" isOpen={screen.includes("small") ? openTooltip : undefined} onOpenChange={screen.includes("small") ? setOpenTooltip : undefined}  >
         <Button variant={user ? "ghost" : "flat"} size="md" color={user ? "warning" : undefined} radius="none" aria-label="Post vehicle" onPress={handleOpen}
           className={`rounded-sm w-full ${!user && "dark:bg-gray-700 bg-gray-400 cursor-default"} transition-opacity`}>
           Register a Vehicle
@@ -62,12 +42,11 @@ export default function IndexPage() {
   }
 
   useEffect(() => {
-    if (screen.includes("small")) {
+    if (screen !== "" && !screen.includes("small")) setShowSidebar(true);
+    if (screen && screen.includes("small")) {
       const handleScroll = () => setShowSidebar(window.scrollY > 150);
       window.addEventListener("scroll", handleScroll);
       return () => window.removeEventListener("scroll", handleScroll);
-    } else {
-      setShowSidebar(true);
     }
   }, [screen]);
 
@@ -92,7 +71,7 @@ export default function IndexPage() {
             </div>
           </div>
           <div className="flex-1 w-full justify-items-center">
-            <VehiclesList setPage={setPage} vehicles={vehicles} loading={loading} message={message} screen={screen} logged={user} />
+            <VehiclesList setPage={setPage} screen={screen} logged={user} filter={filter} message={message} setMessage={setMessage} setApiLength={setApiLength} setApiPages={setApiPages} page={page} />
             {!message && <PageNavigation apiPages={apiPages} setPage={setPage} page={page} />}
           </div>
           <div className={`lg:w-10 w-[100dvw] transition-all ${showSidebar ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
